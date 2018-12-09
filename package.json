@@ -1,0 +1,52 @@
+{
+  "name": "gogen",
+  "version": "0.0.1",
+  "description": "Use stream API to create generator/initializer packages",
+  "repository": "ambar/gogen",
+  "license": "MIT",
+  "main": "dist",
+  "bin": "gogen.js",
+  "engines": {
+    "node": ">= 8"
+  },
+  "files": [
+    "dist",
+    "gogen.js"
+  ],
+  "keywords": [
+    "generator",
+    "initializer",
+    "starter kit",
+    "scaffolding",
+    "yeoman"
+  ],
+  "scripts": {
+    "prepublishOnly": "npm run build && npm run test",
+    "build": "rm -rf dist && npx @zeit/ncc build lib -S -o dist",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch --notify"
+  },
+  "devDependencies": {
+    "execa": "^1.0.0",
+    "globby": "^8.0.1",
+    "jest": "^23.6.0",
+    "kleur": "^3.0.0",
+    "lodash.template": "^4.4.0",
+    "minimist": "^1.2.0",
+    "prompts": "^1.2.1",
+    "pump": "^3.0.0",
+    "through2": "^2.0.0",
+    "vinyl-fs": "^3.0.3"
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/examples/"
+    ],
+    "modulePathIgnorePatterns": [
+      "/examples/",
+      "/tmp/"
+    ]
+  }
+}

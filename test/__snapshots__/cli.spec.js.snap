@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`gogen should run \`with-ejs\` correctly 1`] = `
+Array [
+  ".gitignore",
+  "README.md",
+  "index.js",
+  "package.json",
+  "yarn.lock",
+]
+`;
+
+exports[`gogen should run \`without-gogenrc\` correctly 1`] = `
+Array [
+  ".eslintrc",
+  ".gitignore",
+  "index.js",
+  "package.json",
+  "yarn.lock",
+]
+`;
+
+exports[`gogen should run generator correctly 1`] = `
+Array [
+  ".eslintrc",
+  ".gitignore",
+  "README.md",
+  "index.js",
+  "package.json",
+  "subpackage/.gitignore",
+  "subpackage/package.json",
+  "yarn.lock",
+]
+`;
+
+exports[`gogen should run initializer correctly 1`] = `
+Array [
+  ".gitignore",
+  ".gogenrc.js",
+  "package.json",
+  "template/gitignore",
+  "template/index.js",
+  "template/package.json",
+  "yarn.lock",
+]
+`;

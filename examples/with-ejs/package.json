@@ -1,0 +1,8 @@
+{
+  "name": "with-ejs",
+  "private": true,
+  "version": "0.0.0",
+  "dependencies": {
+    "ejs": "^2.6.1"
+  }
+}
