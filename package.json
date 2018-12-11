@@ -28,7 +28,7 @@
     "test:watch": "jest --watch --notify"
   },
   "devDependencies": {
-    "execa": "^1.0.0",
+    "get-stream": "^4.1.0",
     "globby": "^8.0.1",
     "jest": "^23.6.0",
     "kleur": "^3.0.0",

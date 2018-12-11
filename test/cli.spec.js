@@ -3,7 +3,7 @@ const path = require('path')
 const globby = require('globby')
 const mkdirp = require('mkdirp')
 const rimraf = require('rimraf')
-const {shell} = require('execa')
+const shell = require('../lib/utils/shell')
 const {create} = require('../lib')
 
 const resolveRoot = path.resolve.bind(null, process.cwd())
