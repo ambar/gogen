@@ -10,7 +10,7 @@ Use [vinyl-fs](https://github.com/gulpjs/vinyl-fs) based stream API to create ge
 ## Features
 
 - [Gulp](https://github.com/gulpjs/gulp)-compatible stream API
-- Lightweight, single file bundled (64K gzip size), no need to install globally, just run `npx`
+- Lightweight, single file bundled (<60K gzip size), no need to install globally, just run `npx`
 - Automatically rename `gitignore` to `.gitignore`, due to [npm/issues/1862](https://github.com/npm/npm/issues/1862)
 - Automatically set `name` field in `package.json`
 - Render `*.foo.t` to `*.foo` with lodash template
