@@ -20,7 +20,11 @@ const getFiles = async base =>
     cwd: base,
     dot: true,
     gitignore: true,
-    ignore: ['**/.git', '**/node_modules'],
+    ignore: [
+      '**/.git',
+      '**/node_modules',
+      'yarn.lock' /* travis `Lockfile not saved` */,
+    ],
   })).sort()
 
 const readJson = file => JSON.parse(fs.readFileSync(file))

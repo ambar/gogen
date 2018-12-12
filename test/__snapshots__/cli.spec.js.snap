@@ -6,7 +6,6 @@ Array [
   "README.md",
   "index.js",
   "package.json",
-  "yarn.lock",
 ]
 `;
 
@@ -16,7 +15,6 @@ Array [
   ".gitignore",
   "index.js",
   "package.json",
-  "yarn.lock",
 ]
 `;
 
@@ -29,7 +27,6 @@ Array [
   "package.json",
   "subpackage/.gitignore",
   "subpackage/package.json",
-  "yarn.lock",
 ]
 `;
 
@@ -41,6 +38,5 @@ Array [
   "template/gitignore",
   "template/index.js",
   "template/package.json",
-  "yarn.lock",
 ]
 `;
