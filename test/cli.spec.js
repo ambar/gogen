@@ -58,9 +58,6 @@ describe('gogen', () => {
     const files = await getFiles(resolveTmp('mylib/'))
     expect(files).toMatchSnapshot()
 
-    // git init
-    expect(fs.existsSync(resolveTmp('mylib/.git'))).toBe(true)
-
     // patches package.json
     expect(readJson(resolveTmp('mylib/package.json'))).toMatchObject({
       name: 'mylib',
