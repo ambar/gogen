@@ -2,9 +2,9 @@
 
 Use [vinyl-fs](https://github.com/gulpjs/vinyl-fs) based stream API to create generator/initializer packages.
 
-[![build status](https://img.shields.io/travis/ambar/gogen/master.svg)](https://travis-ci.org/ambar/gogen)
-[![npm version](https://img.shields.io/npm/v/gogen.svg)](https://www.npmjs.com/package/gogen)
-[![install size](https://packagephobia.now.sh/badge?p=gogen)](https://packagephobia.now.sh/result?p=gogen)
+[![build status](https://badgen.net/travis/ambar/gogen)](https://travis-ci.org/ambar/gogen)
+[![npm version](https://badgen.net/npm/v/gogen)](https://www.npmjs.com/package/gogen)
+[![install size](https://badgen.net/packagephobia/install/gogen)](https://packagephobia.now.sh/result?p=gogen)
 [![minzipped size](https://badgen.net/bundlephobia/minzip/gogen)](https://bundlephobia.com/result?p=gogen)
 
 ## Features
