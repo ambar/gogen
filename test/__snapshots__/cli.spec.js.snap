@@ -1,24 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`gogen should run \`with-ejs\` correctly 1`] = `
-Array [
-  ".gitignore",
-  "README.md",
-  "index.js",
-  "package.json",
-]
-`;
-
-exports[`gogen should run \`without-gogenrc\` correctly 1`] = `
-Array [
-  ".eslintrc",
-  ".gitignore",
-  "index.js",
-  "package.json",
-]
-`;
-
-exports[`gogen should run generator correctly 1`] = `
+exports[`gogen should generate \`basic\` 1`] = `
 Array [
   ".eslintrc",
   ".gitignore",
@@ -30,7 +12,7 @@ Array [
 ]
 `;
 
-exports[`gogen should run initializer correctly 1`] = `
+exports[`gogen should generate \`create-gogen\` 1`] = `
 Array [
   ".gitignore",
   ".gogenrc.js",
@@ -38,5 +20,23 @@ Array [
   "template/gitignore",
   "template/index.js",
   "template/package.json",
+]
+`;
+
+exports[`gogen should generate \`with-ejs\` 1`] = `
+Array [
+  ".gitignore",
+  "README.md",
+  "index.js",
+  "package.json",
+]
+`;
+
+exports[`gogen should generate \`without-gogenrc\` 1`] = `
+Array [
+  ".eslintrc",
+  ".gitignore",
+  "index.js",
+  "package.json",
 ]
 `;

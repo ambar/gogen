@@ -16,6 +16,7 @@ Use [vinyl-fs](https://github.com/gulpjs/vinyl-fs) based stream API to create ge
 - Render `*.foo.t` to `*.foo` with lodash template
 - Add command line prompts with [prompts](https://github.com/terkelg/prompts#-usage)
 - Add command line arguments with [minimist](https://github.com/substack/minimist)
+- Provide fast, in-memory testing API
 
 ## Usage
 
@@ -109,6 +110,24 @@ npm init <your-initializer> <your-project>
     - `install(deps: string[], {dev: boolean, silent: boolean}) => Promise` install dependencies
     - `gitInit(message: string) => Promise` init git repository
     - `prompts(Array | Object) => Promise` see [prompts](https://github.com/terkelg/prompts#-usage)
+
+## Testing
+
+Use the `mock` API:
+
+- `mock(generator: string, directory: string)`:
+  - `generator` path to generator
+  - `directory` path to output
+
+```js
+const {mock} = require('gogen')
+
+it('generate correctly', async () => {
+  const {files, readFile} = await mock('.', 'dist')
+  expect(files).toMatchSnapshot()
+  expect(readFile('package.json')).toMatch(/superb/)
+})
+```
 
 ## Comparison with alternatives
 
