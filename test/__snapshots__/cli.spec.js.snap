@@ -32,6 +32,15 @@ Array [
 ]
 `;
 
+exports[`gogen should generate \`with-prompts\` 1`] = `
+Array [
+  ".eslintrc",
+  ".gitignore",
+  "index.js",
+  "package.json",
+]
+`;
+
 exports[`gogen should generate \`without-gogenrc\` 1`] = `
 Array [
   ".eslintrc",

@@ -2,8 +2,13 @@ module.exports = async (
   {src, dest, pipeline, packages},
   {install, gitInit, prompts}
 ) => {
-  const {devDeps} = await prompts(
+  const {description, devDeps} = await prompts(
     [
+      {
+        type: 'text',
+        name: 'description',
+        message: 'Description',
+      },
       {
         type: 'multiselect',
         name: 'devDeps',
@@ -20,6 +25,7 @@ module.exports = async (
   await pipeline(
     src('template/**'),
     packages({
+      description,
       ...(devDeps.includes('jest') && {
         jest: {
           coverageReporters: ['html'],

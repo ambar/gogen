@@ -39,6 +39,17 @@ describe('gogen', () => {
     })
   })
 
+  it('should generate `with-prompts`', async () => {
+    const {files, readFile} = await mock('./examples/with-prompts', 'mylib', {
+      answers: {
+        description: 'superb',
+        devDeps: [],
+      },
+    })
+    expect(files).toMatchSnapshot()
+    expect(readFile('package.json')).toMatch(/superb/)
+  })
+
   it('should generate `without-gogenrc`', async () => {
     const {files} = await mock('./examples/without-gogenrc', 'mylib')
     expect(files).toMatchSnapshot()

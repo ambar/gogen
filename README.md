@@ -115,15 +115,19 @@ npm init <your-initializer> <your-project>
 
 Use the `mock` API:
 
-- `mock(generator: string, directory: string)`:
+- `mock(generator: string, directory: string, options: Object)`:
   - `generator` path to generator
   - `directory` path to output
+  - `options`
+    - `answers: Object` inject prompt values
 
 ```js
 const {mock} = require('gogen')
 
 it('generate correctly', async () => {
-  const {files, readFile} = await mock('.', 'dist')
+  const {files, readFile} = await mock('.', 'dist', {
+    answers: {description: 'superb'},
+  })
   expect(files).toMatchSnapshot()
   expect(readFile('package.json')).toMatch(/superb/)
 })
