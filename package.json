@@ -1,6 +1,6 @@
 {
   "name": "gogen",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Use stream API to create generator/initializer packages",
   "repository": "ambar/gogen",
   "license": "MIT",
