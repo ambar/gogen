@@ -22,12 +22,13 @@ Use [vinyl-fs](https://github.com/gulpjs/vinyl-fs) based stream API to create ge
 
 ### Run existing generator
 
-Run from npm/GitHub/git/folder, same as [npm install](https://docs.npmjs.com/cli/install#synopsis):
+Run from any npm package (registry/GitHub/git/folder...), same as [npm install](https://docs.npmjs.com/cli/install#synopsis) or [yarn add](https://yarnpkg.com/lang/en/docs/cli/add/):
 
 ```bash
 # install generator to directory
 npx gogen <generator> <directory>
-npx gogen [<@scope>/]<name> <directory> # npm
+# eg.
+npx gogen [<@scope>/]<name> <directory> # npm registry
 npx gogen <user>/<repo> <directory>  # GitHub
 npx gogen <host>:<name>/<repo> <directory>  # git
 npx gogen <folder> <directory> # folder

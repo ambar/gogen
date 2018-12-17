@@ -44,8 +44,7 @@
       "/examples/"
     ],
     "modulePathIgnorePatterns": [
-      "/examples/",
-      "/tmp/"
+      "/examples/"
     ]
   }
 }
