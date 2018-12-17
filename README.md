@@ -135,8 +135,8 @@ it('generate correctly', async () => {
 
 ## Comparison with alternatives
 
-| Library                                 | Package Phobia                                                                                             |
-| --------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| [gogen](https://github.com/ambar/gogen) | [![install size](https://packagephobia.now.sh/badge?p=gogen)](https://packagephobia.now.sh/result?p=gogen) |
-| [sao](https://saojs.org/)               | [![install size](https://packagephobia.now.sh/badge?p=sao)](https://packagephobia.now.sh/result?p=sao)     |
-| [yeoman](https://yeoman.io)             | [![install size](https://packagephobia.now.sh/badge?p=yo)](https://packagephobia.now.sh/result?p=yo)       |
+| Library                                 | Package Phobia                                                                                                 |
+| --------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| [gogen](https://github.com/ambar/gogen) | [![install size](https://badgen.net/packagephobia/install/gogen)](https://packagephobia.now.sh/result?p=gogen) |
+| [sao](https://saojs.org/)               | [![install size](https://badgen.net/packagephobia/install/sao)](https://packagephobia.now.sh/result?p=sao)     |
+| [yeoman](https://yeoman.io)             | [![install size](https://badgen.net/packagephobia/install/yo)](https://packagephobia.now.sh/result?p=yo)       |
