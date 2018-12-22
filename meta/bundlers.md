@@ -12,10 +12,7 @@ ncc versions:
 - `@zeit/ncc@0.7`: 219K, 2.53s
 - `@zeit/ncc@0.8`: 219K, 1.75s (webpack#next)
 
-readable-stream:
-
-- bundle `readable-stream`: 192K
-- eliminate `readable-stream`: 165K
+Reduce bundle size via [alias](../alias).
 
 ## webpack CLI options
 

@@ -1,4 +1,5 @@
-// eliminate readable-stream@2: https://unpkg.com/readable-stream@2.3.6/readable.js
+// Copy from https://unpkg.com/readable-stream@2.3.6/readable.js
+// Removed conditional require to ensure eliminate readable-stream
 const Stream = require('stream')
 module.exports = Stream
 exports = module.exports = Stream.Readable

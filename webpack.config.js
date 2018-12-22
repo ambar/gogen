@@ -14,9 +14,6 @@ module.exports = {
     libraryTarget: 'commonjs',
   },
   resolve: {
-    alias: {
-      // ensure dead code elimination
-      'readable-stream': path.resolve(__dirname, 'stream'),
-    },
+    alias: require('./alias'),
   },
 }
