@@ -21,10 +21,11 @@
 └─────────────────┴──────────────┴────────┘
 ```
 
-| Library                                                          | Package Phobia                                                                                                                 |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| [ejs](https://ejs.co/)                                           | [![install size](https://packagephobia.now.sh/badge?p=ejs)](https://packagephobia.now.sh/result?p=ejs)                         |
-| [lodash.template](https://www.npmjs.com/package/lodash.template) | [![install size](https://packagephobia.now.sh/badge?p=lodash.template)](https://packagephobia.now.sh/result?p=lodash.template) |
+| Library                                                          | Package Phobia                                                                                                                     | Bundle Size                                                                                                                 |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| [ejs](https://ejs.co/)                                           | [![install size](https://badgen.net/packagephobia/install/ejs)](https://packagephobia.now.sh/result?p=ejs)                         | [![minzipped size](https://badgen.net/bundlephobia/min/ejs)](https://bundlephobia.com/result?p=ejs)                         |
+| [lodash.template](https://www.npmjs.com/package/lodash.template) | [![install size](https://badgen.net/packagephobia/install/lodash.template)](https://packagephobia.now.sh/result?p=lodash.template) | [![minzipped size](https://badgen.net/bundlephobia/min/lodash.template)](https://bundlephobia.com/result?p=lodash.template) |
+| [mustache](https://www.npmjs.com/package/mustache)               | [![install size](https://badgen.net/packagephobia/install/mustache)](https://packagephobia.now.sh/result?p=mustache)               | [![minzipped size](https://badgen.net/bundlephobia/min/mustache)](https://bundlephobia.com/result?p=mustache)               |
 
 ## Development
 
