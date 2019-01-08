@@ -4,7 +4,7 @@
   "description": "Use stream API to create generator/initializer packages",
   "repository": "ambar/gogen",
   "license": "MIT",
-  "main": "dist",
+  "main": "dist/index.js",
   "bin": "gogen.js",
   "engines": {
     "node": ">= 8"
@@ -26,6 +26,7 @@
     "build": "npm run build:webpack",
     "build:ncc": "npm run clean && npx @zeit/ncc build lib -S -o dist",
     "build:webpack": "npm run clean && webpack -p",
+    "build:rollup": "npm run clean && rollup -c",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch --notify"
@@ -38,6 +39,11 @@
     "minimist": "^1.2.0",
     "prompts": "^1.2.1",
     "pump": "^3.0.0",
+    "rollup": "^1.0.2",
+    "rollup-plugin-alias": "^1.5.1",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-terser": "^4.0.1",
     "through2": "^2.0.0",
     "vinyl-fs": "^3.0.3",
     "webpack": "^4.28.0",
