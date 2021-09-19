@@ -1,12 +1,13 @@
 const path = require('path')
 
 /**
- * https://webpack.js.org/configuration/
+ * @type {import('webpack').Configuration}
+ * @see https://webpack.js.org/configuration/
  */
 module.exports = {
   target: 'node',
   mode: 'production',
-  devtool: false,
+  devtool: process.env.SOURCE_MAP ? 'source-map' : false,
   entry: './lib',
   output: {
     path: path.resolve(__dirname, 'dist'),

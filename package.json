@@ -24,23 +24,24 @@
     "prepublishOnly": "npm run build && npm run test",
     "clean": "rm -rf dist",
     "build": "npm run build:webpack",
-    "build:ncc": "npm run clean && npx @zeit/ncc build lib -S -o dist",
-    "build:webpack": "npm run clean && webpack -p",
+    "build:ncc": "npm run clean && ncc build lib -o dist -m",
+    "build:webpack": "npm run clean && webpack",
+    "build:inspect": "SOURCE_MAP=yes yarn build && source-map-explorer dist/index.js",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch --notify"
   },
   "devDependencies": {
     "get-stream": "^4.1.0",
-    "jest": "^23.6.0",
+    "jest": "^27.2.0",
     "kleur": "^3.0.0",
     "lodash.template": "^4.4.0",
     "minimist": "^1.2.0",
     "prompts": "^1.2.1",
     "through2": "^2.0.0",
     "vinyl-fs": "^3.0.3",
-    "webpack": "^4.28.0",
-    "webpack-cli": "^3.1.2"
+    "webpack": "^5.53.0",
+    "webpack-cli": "^4.8.0"
   },
   "jest": {
     "coveragePathIgnorePatterns": [
