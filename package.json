@@ -7,7 +7,7 @@
   "main": "dist",
   "bin": "gogen.js",
   "engines": {
-    "node": ">= 8"
+    "node": ">= 10"
   },
   "files": [
     "dist",
@@ -37,7 +37,6 @@
     "lodash.template": "^4.4.0",
     "minimist": "^1.2.0",
     "prompts": "^1.2.1",
-    "pump": "^3.0.0",
     "through2": "^2.0.0",
     "vinyl-fs": "^3.0.3",
     "webpack": "^4.28.0",
