@@ -23,5 +23,5 @@
 ## Development
 
 ```
-rm -rf dist && node ../../gogen . dist
+rm -rf dist && yarn gogen . dist
 ```

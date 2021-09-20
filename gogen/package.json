@@ -4,10 +4,13 @@
   "description": "Use stream API to create generator/initializer packages",
   "repository": "ambar/gogen",
   "license": "MIT",
-  "main": "dist",
+  "main": "lib",
   "bin": "gogen.js",
   "engines": {
     "node": ">= 10"
+  },
+  "publishConfig": {
+    "main": "dist"
   },
   "files": [
     "dist",

@@ -1,3 +1,3 @@
 ```
-rm -rf dist && GOGEN_ENV=devnode ../../gogen . dist
+rm -rf dist && yarn gogen . dist
 ```
