@@ -3,5 +3,22 @@
   "workspaces": [
     "gogen",
     "examples/*"
-  ]
+  ],
+  "scripts": {
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch --notify"
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "/examples/"
+    ],
+    "modulePathIgnorePatterns": [
+      "/examples/.*/template"
+    ]
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.1",
+    "jest": "^27.2.0"
+  }
 }
