@@ -5,7 +5,7 @@
   "repository": "ambar/gogen",
   "license": "MIT",
   "main": "lib",
-  "bin": "gogen.js",
+  "bin": "cli.js",
   "engines": {
     "node": ">= 10"
   },
@@ -14,7 +14,7 @@
   },
   "files": [
     "dist",
-    "gogen.js"
+    "cli.js"
   ],
   "keywords": [
     "gogen",
