@@ -2,6 +2,7 @@
   "private": true,
   "workspaces": [
     "gogen",
+    "create-gogen",
     "examples/*"
   ],
   "scripts": {

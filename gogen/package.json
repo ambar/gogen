@@ -24,7 +24,7 @@
     "yeoman"
   ],
   "scripts": {
-    "prepublishOnly": "npm run build && npm run test",
+    "prepublishOnly": "npm run build",
     "clean": "rm -rf dist",
     "build": "npm run build:webpack",
     "build:ncc": "npm run clean && ncc build lib -o dist -m",

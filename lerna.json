@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "packages": ["gogen", "create-gogen", "examples/*"],
+  "useWorkspaces": true,
+  "npmClient": "yarn",
+  "command": {
+    "publish": {
+      "conventionalCommits": true,
+      "message": "chore(release): publish %s"
+    }
+  }
+}
