@@ -14,7 +14,8 @@
       "/examples/"
     ],
     "modulePathIgnorePatterns": [
-      "/examples/.*/template"
+      "/examples/.*/template",
+      "/gogen/test/fixtures/.*/template"
     ]
   },
   "devDependencies": {

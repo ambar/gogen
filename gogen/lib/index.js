@@ -12,7 +12,7 @@ const run = async (
   })
   if (argv._.length < 2) {
     console.error(usage)
-    process.exit()
+    process.exit(1)
   }
 
   try {

@@ -1,9 +1,6 @@
 {
-  "name": "basic",
+  "name": "test-basic",
   "private": true,
   "version": "0.0.0",
-  "scripts": {
-    "gen": "gogen . dist"
-  },
   "dependencies": {}
 }

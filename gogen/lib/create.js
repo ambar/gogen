@@ -6,6 +6,7 @@ const vfs = require('vinyl-fs')
 const colors = require('kleur')
 const prompts = require('prompts')
 const shell = require('./utils/shell')
+const createTempDir = require('./utils/createTempDir')
 const dotgitignore = require('./plugins/dotgitignore')
 const modify = require('./plugins/modify')
 const packages = require('./plugins/packages')
@@ -43,15 +44,6 @@ const npmInit = async (path) => {
     cwd: path,
     stdio: 'ignore',
   })
-}
-
-const createTempDir = ({prefix} = {}) => {
-  const crypto = require('crypto')
-  const os = require('os')
-  const uuid = crypto.randomBytes(16).toString('hex')
-  const tempDir = path.resolve(os.tmpdir(), (prefix ? `${prefix}-` : '') + uuid)
-  fs.mkdirSync(tempDir)
-  return tempDir
 }
 
 const gitInit = async (
