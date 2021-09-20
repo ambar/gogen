@@ -1,6 +1,10 @@
 {
-  "version": "1.0.0",
-  "packages": ["gogen", "create-gogen", "examples/*"],
+  "version": "1.0.1",
+  "packages": [
+    "gogen",
+    "create-gogen",
+    "examples/*"
+  ],
   "useWorkspaces": true,
   "npmClient": "yarn",
   "command": {

@@ -1,6 +1,6 @@
 {
   "name": "create-gogen",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "main": "index.js",
   "license": "MIT",
   "bin": "cli.js",
@@ -13,6 +13,6 @@
     "gogen"
   ],
   "dependencies": {
-    "gogen": "^1"
+    "gogen": "^1.0.1"
   }
 }
