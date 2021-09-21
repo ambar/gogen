@@ -1,6 +1,6 @@
 # GoGen
 
-Use [vinyl-fs](https://github.com/gulpjs/vinyl-fs) based stream API to create generator/initializer packages.
+Use stream API to scaffold projects or files.
 
 [![Coverage Status](https://coveralls.io/repos/github/ambar/gogen/badge.svg?branch=master)](https://coveralls.io/github/ambar/gogen?branch=master)
 [![npm version](https://badgen.net/npm/v/gogen)](https://www.npmjs.com/package/gogen)
@@ -9,7 +9,7 @@ Use [vinyl-fs](https://github.com/gulpjs/vinyl-fs) based stream API to create ge
 
 ## Features
 
-- [Gulp](https://github.com/gulpjs/gulp)-compatible stream API
+- [vinyl-fs](https://github.com/gulpjs/vinyl-fs) based, [Gulp](https://github.com/gulpjs/gulp)-compatible stream API
 - Lightweight, single file bundled (<50K gzip size), no need to install globally, just run `npx`
 - Automatically rename `gitignore` to `.gitignore`, due to [npm/issues/1862](https://github.com/npm/npm/issues/1862)
 - Automatically set `name` field in `package.json`
@@ -33,6 +33,15 @@ npx gogen <user>/<repo> <directory>  # GitHub
 npx gogen <host>:<name>/<repo> <directory>  # git
 npx gogen <folder> <directory> # folder
 ```
+
+### Examples
+
+- Scaffold project
+  - [examples/basic](./examples/basic/.gogenrc.js)
+  - [examples/with-ejs](./examples/with-ejs/.gogenrc.js)
+  - [examples/with-prompts](./examples/with-prompts/.gogenrc.js)
+- npm initializer or starter kits
+  - [create-gogen](./create-gogen)
 
 ### Create generator
 
@@ -63,7 +72,7 @@ Run the generator:
 npx gogen <your-generator> <your-project>
 ```
 
-### Create initializer
+### Create npm initializer
 
 Add a bin file, eg. [examples/create-gogen/cli.js](./examples/create-gogen/cli.js).
 
@@ -81,13 +90,6 @@ Run the initializer:
 npm init <your-initializer> <your-project>
 # or: yarn create <your-initializer> <your-project>
 ```
-
-### Examples
-
-- [examples/basic](./examples/basic)
-- [examples/with-ejs](./examples/with-ejs)
-- [examples/with-prompts](./examples/with-prompts)
-- [examples/create-gogen](./examples/create-gogen)
 
 ### Configuration file
 

@@ -3,6 +3,6 @@
   "private": true,
   "version": "1.0.1",
   "scripts": {
-    "gen": "gogen . dist"
+    "gen": "rm -rf dist && gogen . dist"
   }
 }

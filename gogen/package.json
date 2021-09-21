@@ -1,7 +1,7 @@
 {
   "name": "gogen",
   "version": "1.0.1",
-  "description": "Use stream API to create generator/initializer packages",
+  "description": "Use stream API to scaffold projects or files",
   "repository": "ambar/gogen",
   "license": "MIT",
   "main": "index.js",

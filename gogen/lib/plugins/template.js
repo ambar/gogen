@@ -17,7 +17,7 @@ module.exports = (
     if (!test && ext) {
       file.path = file.path.replace(
         ext,
-        ext === defaultExt && file.path.match(ext)?.length > 1 ? '$1' : ''
+        ext === defaultExt && file.path.match(ext).length > 1 ? '$1' : ''
       )
     }
     return render(content, data, options)

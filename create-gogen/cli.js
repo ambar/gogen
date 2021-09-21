@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
-// TODO: use linked package
-const {run} = require(process.env.GOGEN_ENV === 'dev' ? '../../lib' : 'gogen')
+const {run} = require('gogen')
 run(
   [__dirname, ...process.argv.slice(2)],
   'Usage: npm init gogen <my-generator>'
