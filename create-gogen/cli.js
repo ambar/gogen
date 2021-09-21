@@ -6,8 +6,8 @@ run(
   'Usage: npm init gogen <my-generator>'
 )
 
-// or use `create`:
+// OR
 // const {create} = require('gogen')
-// gogen.create({
+// create({
 //   _: [__dirname, ...process.argv.slice(2)],
 // })

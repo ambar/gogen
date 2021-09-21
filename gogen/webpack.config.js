@@ -16,5 +16,9 @@ module.exports = {
   },
   resolve: {
     alias: require('./alias'),
+    extensions: ['...', '.ts', '.tsx'],
+  },
+  module: {
+    rules: [{test: /\.tsx?$/, loader: 'ts-loader'}],
   },
 }

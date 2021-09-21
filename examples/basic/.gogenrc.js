@@ -1,3 +1,6 @@
+/**
+ * @type {import('gogen').Generator}
+ */
 module.exports = async (
   {src, dest, pipeline, packages, template, install, gitInit},
   {name}

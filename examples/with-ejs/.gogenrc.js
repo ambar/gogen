@@ -1,5 +1,8 @@
 const ejs = require('ejs')
 
+/**
+ * @type {import('gogen').Generator}
+ */
 module.exports = async (
   {src, dest, pipeline, template, install, gitInit},
   {name}

@@ -1,7 +1,15 @@
-module.exports = async (
-  {src, dest, pipeline, packages, install, gitInit},
-  {prompts}
-) => {
+/**
+ * @type {import('gogen').Generator}
+ */
+module.exports = async ({
+  src,
+  dest,
+  pipeline,
+  packages,
+  install,
+  gitInit,
+  prompts,
+}) => {
   const {description, devDeps} = await prompts(
     [
       {

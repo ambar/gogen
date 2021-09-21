@@ -3,7 +3,7 @@ import prompts from 'prompts'
 import create from './create'
 
 const createMFS = () => {
-  const data = {}
+  const data: Record<string, string> = {}
   const writer = through.obj((file: any, enc: any, next: any) => {
     if (file.isBuffer()) {
       data[file.relative] = file.contents
@@ -19,15 +19,15 @@ const createMFS = () => {
     get files() {
       return Object.keys(data).sort()
     },
-    readFile(file: any) {
+    readFile(file: string) {
       return data[file].toString()
     },
   }
 }
 
 const mock = async (
-  generator: any,
-  directory: any,
+  generator: string,
+  directory: string,
   {answers = {}, context}: any = {}
 ) => {
   const mfs = createMFS()

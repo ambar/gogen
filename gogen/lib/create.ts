@@ -2,42 +2,27 @@ import fs from 'fs'
 import path from 'path'
 import stream from 'stream'
 import {promisify} from 'util'
-import vfs from 'vinyl-fs'
+import * as vfs from 'vinyl-fs'
 import colors from 'kleur'
 import prompts from 'prompts'
+import {ParsedArgv} from './types'
 import shell from './utils/shell'
+import canUseYarn from './utils/canUseYarn'
 import createTempDir from './utils/createTempDir'
+import gitInit from './utils/gitInit'
+import install from './utils/install'
 import dotgitignore from './plugins/dotgitignore'
 import modify from './plugins/modify'
 import packages from './plugins/packages'
 import template from './plugins/template'
 import defaultRc from './.gogenrc.default'
 
-const boolify = (promise: any) =>
-  promise.then(
-    (_: any) => true,
-    (_: any) => false
-  )
+type Awaited<T> = T extends PromiseLike<infer U> ? Awaited<U> : T
 
-const canUseYarn = async () =>
-  // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'string | undefined' is not assig... Remove this comment to see the full error message
-  /yarn/.test(process.env.npm_execpath) || boolify(shell('yarnpkg --version'))
+type ReturnPair = Awaited<ReturnType<typeof loadGenerator>>
 
-const install = async (
-  deps = [],
-  {dev = false, silent = false, cwd, stdio = 'inherit'}: any = {}
-) => {
-  const useYarn = await canUseYarn()
-  if (useYarn) {
-    const args = deps.length ? ['add', ...deps, dev && '--dev'] : []
-    if (silent) args.push('--silent')
-    await shell(`yarn ${args.filter((n) => n).join(' ')}`, {cwd, stdio})
-  } else {
-    const args = deps.length ? [...deps, dev && '--save-dev'] : []
-    if (silent) args.push('--silent')
-    await shell(`npm i ${args.filter((n) => n).join(' ')}`, {cwd, stdio})
-  }
-}
+export type API = ReturnPair[1]
+export type Context = Omit<ReturnPair[2], 'install' | 'gitInit' | 'prompts'>
 
 const npmInit = async (path: any) => {
   const useYarn = await canUseYarn()
@@ -45,31 +30,6 @@ const npmInit = async (path: any) => {
     cwd: path,
     stdio: 'ignore',
   })
-}
-
-const gitInit = async (
-  message = 'initial commit',
-  {cwd, stdio = 'ignore'}: any = {}
-) => {
-  const isInsideWorkTree = () =>
-    boolify(
-      shell('git rev-parse --is-inside-work-tree', {cwd, stdio: 'ignore'})
-    )
-
-  const checkIgnore = () =>
-    boolify(shell('git check-ignore .', {cwd, stdio: 'ignore'}))
-
-  if ((await isInsideWorkTree()) && !(await checkIgnore())) {
-    return
-  }
-
-  try {
-    await shell('git init', {cwd, stdio})
-    await shell('git add .', {cwd, stdio})
-    await shell(`git commit -am '${message}'`, {cwd, stdio})
-  } catch (e) {
-    // no git installed, or no git user/email config
-  }
 }
 
 const partialOptions = (fn: any, partial: any) => (arg: any, options: any) =>
@@ -85,12 +45,13 @@ const getPathType = (path: any) => {
   return 'npm'
 }
 
-const downloadFromNpmPackage = async (packagePath: any) => {
+const downloadFromNpmPackage = async (packagePath: string) => {
   const tempDir = createTempDir({prefix: 'gogen'})
   await npmInit(tempDir)
-  // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
   await install([packagePath], {cwd: tempDir, silent: true})
-  const pkg = JSON.parse(fs.readFileSync(path.resolve(tempDir, 'package.json')))
+  const pkg = JSON.parse(
+    fs.readFileSync(path.resolve(tempDir, 'package.json')).toString()
+  )
   const depName = Object.keys(pkg.dependencies)[0]
   return path.resolve(tempDir, 'node_modules', depName)
 }
@@ -110,8 +71,7 @@ const downloadFromGitRepo = async (repoPath: any) => {
   return tempDir
 }
 
-// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'create'.
-const create = async (argv: any, {mock}: any = {}) => {
+export const loadGenerator = async (argv: ParsedArgv, {mock}: any = {}) => {
   const [generator, directory] = argv._
 
   if (!generator) {
@@ -123,7 +83,7 @@ const create = async (argv: any, {mock}: any = {}) => {
   }
 
   const pathType = getPathType(generator)
-  let srcPath: any
+  let srcPath: string
   if (pathType === 'local') {
     srcPath = path.resolve(generator)
   } else {
@@ -146,20 +106,20 @@ const create = async (argv: any, {mock}: any = {}) => {
 
   // non-stream API
   let extra = {
-    install: partialOptions(install, {cwd: destPath}),
-    gitInit: partialOptions(gitInit, {cwd: destPath}),
+    install: partialOptions(install, {cwd: destPath}) as typeof install,
+    gitInit: partialOptions(gitInit, {cwd: destPath}) as typeof gitInit,
     prompts,
   }
 
   const api = {
-    src: (globs: any, options: any) =>
+    src: (globs: string[], options: vfs.SrcOptions) =>
       vfs
         .src(defaultIgnore.concat(globs), {cwd: srcPath, dot: true, ...options})
         .pipe(dotgitignore())
         .pipe(packages({name})),
-    dest: (directory = destPath, options: any) =>
-      vfs.dest(directory, {cwd: srcPath, ...options}),
-    // promisify pipeline, Node v15 has native support
+    dest: (folder = destPath, options?: vfs.DestOptions) =>
+      vfs.dest(folder, {cwd: srcPath, ...options}),
+    // Node v15 has native support (`import {pipeline} from 'stream/promises'`)
     pipeline: promisify(stream.pipeline),
     packages,
     modify,
@@ -183,10 +143,11 @@ const create = async (argv: any, {mock}: any = {}) => {
 
   console.info(`Creating ${colors.green(name)}...`)
   const rcFile = path.resolve(srcPath, '.gogenrc.js')
-  const boostrap = fs.existsSync(rcFile)
-    ? eval('require')(rcFile) // hack to fix webpack error: `Critical dependency: the request of a dependency is an expression`
-    : defaultRc
-  await boostrap(api, context)
+  const fn = fs.existsSync(rcFile) ? require(rcFile) : defaultRc
+  return [fn, api, context] as const
 }
 
-export default create
+export default async (argv: ParsedArgv, opts?: any) => {
+  const [fn, api, context] = await loadGenerator(argv, opts)
+  return fn(api, context)
+}

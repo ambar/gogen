@@ -4,20 +4,17 @@
   "description": "Use stream API to scaffold projects or files",
   "repository": "ambar/gogen",
   "license": "MIT",
-  "source": "lib/index.js",
-  "main": "dist/index.js",
   "bin": "cli.js",
+  "source": "lib/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "engines": {
     "node": ">= 10"
   },
   "files": [
     "dist",
-    "index.js",
     "cli.js"
   ],
-  "publishConfig": {
-    "main": "dist"
-  },
   "keywords": [
     "gogen",
     "generator",
@@ -28,20 +25,29 @@
     "yeoman"
   ],
   "scripts": {
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "yarn build",
     "prebuild": "rm -rf dist",
-    "build": "yarn build:esbuild",
-    "build:ncc": "ncc build lib -o dist -m",
+    "build": "yarn build:esbuild && yarn build:dts",
     "build:webpack": "webpack",
+    "build:rollup": "rollup -c",
+    "build:dts": "rollup -c rollup.config.dts.js",
+    "build:ncc": "ncc build lib/index.ts -o dist -m",
     "build:esbuild": "esbuild $npm_package_source --outfile=$npm_package_main --bundle --minify --platform=node --target=node10 --format=cjs",
     "build:inspect": "SOURCE_MAP=yes yarn build && source-map-explorer dist/index.js"
   },
   "devDependencies": {
+    "@types/get-stream": "^3.0.2",
+    "@types/lodash.template": "^4.5.0",
+    "@types/prompts": "^2.0.14",
+    "@types/through2": "^2.0.36",
+    "@types/vinyl-fs": "^2.4.12",
     "get-stream": "^4.1.0",
     "kleur": "^3.0.0",
     "lodash.template": "^4.4.0",
     "mri": "^1.2.0",
     "prompts": "^1.2.1",
+    "rollup": "^2.56.3",
+    "rollup-plugin-dts": "^4.0.0",
     "through2": "^2.0.0",
     "vinyl-fs": "^3.0.3"
   }

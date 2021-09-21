@@ -1,4 +1,5 @@
-const shell = require('../lib/utils/shell')
+import shell from '../lib/utils/shell'
+import boolify from '../lib/utils/boolify'
 
 test('shell', async () => {
   expect(await shell('yarn -v')).toMatchObject({
@@ -10,4 +11,9 @@ test('shell', async () => {
     code: 1,
     stderr: expect.stringMatching(/Command "xyz" not found/),
   })
+})
+
+test('boolify', async () => {
+  expect(await boolify(Promise.resolve())).toBe(true)
+  expect(await boolify(Promise.reject())).toBe(false)
 })

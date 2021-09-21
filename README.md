@@ -4,6 +4,7 @@ Use stream API to scaffold projects or files.
 
 [![Coverage Status](https://coveralls.io/repos/github/ambar/gogen/badge.svg?branch=master)](https://coveralls.io/github/ambar/gogen?branch=master)
 [![npm version](https://badgen.net/npm/v/gogen)](https://www.npmjs.com/package/gogen)
+![](https://badgen.net/npm/types/gogen)
 [![install size](https://badgen.net/packagephobia/install/gogen)](https://packagephobia.now.sh/result?p=gogen)
 [![minzipped size](https://badgen.net/bundlephobia/minzip/gogen)](https://bundlephobia.com/result?p=gogen)
 
@@ -59,6 +60,9 @@ The default directory structure, used in [examples](./examples):
 Edit the `.gogenrc.js` file:
 
 ```js
+/**
+ * @type {import('gogen').Generator}
+ */
 module.exports = async ({src, dest, pipeline, install, gitInit}) => {
   await pipeline(src('template/**'), dest())
   await install()

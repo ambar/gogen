@@ -1,7 +1,7 @@
-const path = require('path')
-const glob = require('glob')
-const {mock, run} = require('../lib')
-const createTempDir = require('../lib/utils/createTempDir')
+import path from 'path'
+import {sync} from 'glob'
+import {mock, run} from '../lib'
+import createTempDir from '../lib/utils/createTempDir'
 
 describe('mock', () => {
   test('should throw errors', async () => {
@@ -38,9 +38,8 @@ describe('integration', () => {
     const dist = createTempDir({prefix: 'gogen'})
     const generator = path.resolve(__dirname, 'fixtures/test-basic')
     await run([generator, dist])
-    expect(
-      glob.sync('**', {cwd: dist, dot: true, ignore: ['.git/*/**']}).sort()
-    ).toMatchInlineSnapshot(`
+    expect(sync('**', {cwd: dist, dot: true, ignore: ['.git/*/**']}).sort())
+      .toMatchInlineSnapshot(`
 Array [
   ".git",
   ".gitignore",
@@ -69,7 +68,7 @@ Array [
     const dist = createTempDir({prefix: 'gogen'})
     const generator = 'gogen-pkg'
     await run([generator, dist])
-    expect(glob.sync('**', {cwd: dist}).sort()).toMatchInlineSnapshot(`
+    expect(sync('**', {cwd: dist}).sort()).toMatchInlineSnapshot(`
 Array [
   "LICENSE",
   "README.md",

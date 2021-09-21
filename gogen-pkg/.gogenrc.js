@@ -1,6 +1,9 @@
 const {execSync} = require('child_process')
 const sh = (cmd) => execSync(cmd).toString().trim()
 
+/**
+ * @type {import('gogen').Generator}
+ */
 module.exports = async (
   {src, dest, pipeline, template, install, gitInit},
   {name}

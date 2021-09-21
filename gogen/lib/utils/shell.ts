@@ -1,37 +1,42 @@
-import {spawn} from 'child_process'
+import {spawn, SpawnOptions} from 'child_process'
+import {Stream} from 'stream'
 import getStream from 'get-stream'
+export {SpawnOptions}
 
 // async shell version of `execSync`
 // TODO: use `execa`, removing `semver`: execa -> cross-spwan -> semver (59K)
 // https://github.com/moxystudio/node-cross-spawn
-const shell = async (cmd: string, options = {}) => {
+const shell = async (cmd: string, options: SpawnOptions = {}) => {
   const child = spawn(cmd, {
     shell: true,
     ...options,
-    env: {...process.env, ...(options as any).env},
+    env: {...process.env, ...options.env},
   })
 
-  const done = new Promise((resolve, reject) => {
-    child.on('close', (code: any, signal: any) => {
-      code ? resolve({code, signal}) : reject({code, signal})
-    })
-  })
+  const done = new Promise<{code: number; signal: NodeJS.Signals}>(
+    (resolve, reject) => {
+      child.on('close', (code: number, signal: NodeJS.Signals) => {
+        code ? resolve({code, signal}) : reject({code, signal})
+      })
+    }
+  )
 
-  const textFromStream = (stream: any) =>
+  const textFromStream = (stream: Stream | null): Promise<string | null> =>
     stream
-      ? getStream(stream).then((r: any) => r.trim())
+      ? getStream(stream).then((r: string) => r.trim())
       : Promise.resolve(null)
 
-  const allDone = (promises: any) =>
-    Promise.all(promises.map((p: any) => p.catch((r: any) => r)))
+  const allDone = <T1, T2, T3, T4>(promises: [T1, T2, T3, T4]) =>
+    promises.map((p: any) => p.catch((r: any) => r)) as [T1, T2, T3, T4]
 
-  return allDone([
-    done,
-    textFromStream(child.stdin),
-    textFromStream(child.stderr),
-    textFromStream(child.stdout),
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'code' does not exist on type 'unknown'.
-  ]).then(([{code, signal}, stdin, stderr, stdout]) => {
+  return Promise.all(
+    allDone([
+      done,
+      textFromStream(child.stdin),
+      textFromStream(child.stderr),
+      textFromStream(child.stdout),
+    ])
+  ).then(([{code, signal}, stdin, stderr, stdout]) => {
     const r = {code, signal, stdin, stderr, stdout}
     return code ? Promise.reject(r) : r
   })
