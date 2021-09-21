@@ -1,10 +1,10 @@
-const through = require('through2')
-const prompts = require('prompts')
-const create = require('./create')
+import through from 'through2'
+import prompts from 'prompts'
+import create from './create'
 
 const createMFS = () => {
   const data = {}
-  const writer = through.obj((file, enc, next) => {
+  const writer = through.obj((file: any, enc: any, next: any) => {
     if (file.isBuffer()) {
       data[file.relative] = file.contents
     }
@@ -19,13 +19,17 @@ const createMFS = () => {
     get files() {
       return Object.keys(data).sort()
     },
-    readFile(file) {
+    readFile(file: any) {
       return data[file].toString()
     },
   }
 }
 
-const mock = async (generator, directory, {answers = {}, context} = {}) => {
+const mock = async (
+  generator: any,
+  directory: any,
+  {answers = {}, context}: any = {}
+) => {
   const mfs = createMFS()
   prompts.inject(answers)
   const noop = () => {}
@@ -42,4 +46,4 @@ const mock = async (generator, directory, {answers = {}, context} = {}) => {
   return mfs
 }
 
-module.exports = mock
+export default mock

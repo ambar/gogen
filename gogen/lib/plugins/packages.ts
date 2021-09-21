@@ -1,10 +1,10 @@
-const {json} = require('./modify')
+import {json} from './modify'
 
 // modify package.json in app root
-module.exports = patch =>
+export default (patch: any) =>
   json(
-    file => file.relative === 'package.json',
-    (file, content) =>
+    (file: any) => file.relative === 'package.json',
+    (file: any, content: any) =>
       typeof patch === 'function'
         ? patch(content, file)
         : Object.assign(content, patch)

@@ -1,7 +1,7 @@
-const path = require('path')
-const through = require('through2')
+import path from 'path'
+import through from 'through2'
 
-const doMatch = (match, file) => {
+const doMatch = (match: any, file: any) => {
   if (match instanceof RegExp) {
     return match.test(file.path)
   } else if (typeof match === 'function') {
@@ -10,16 +10,16 @@ const doMatch = (match, file) => {
   return false
 }
 
-const modify = (match = () => {}, fn) =>
-  through.obj((file, enc, cb) => {
+const modify = (match = () => {}, fn: any) =>
+  through.obj((file: any, enc: any, cb: any) => {
     if (file.isBuffer() && doMatch(match, file)) {
       file = fn(file) || file
     }
     cb(null, file)
   })
 
-const text = (match, fn) =>
-  modify(match, (file) => {
+export const text = (match: any, fn: any) =>
+  modify(match, (file: any) => {
     const oldContent = String(file.contents)
     const newContent = fn(file, oldContent)
     if (typeof newContent === 'string' && newContent !== oldContent) {
@@ -27,12 +27,12 @@ const text = (match, fn) =>
     }
   })
 
-const json = (
+export const json = (
   match = /\.json$/,
-  fn,
+  fn: any,
   {finalNewline = true, space = '  '} = {}
 ) =>
-  text(match, (file, content) => {
+  text(match, (file: any, content: any) => {
     try {
       return (
         JSON.stringify(fn(file, JSON.parse(content)), null, space) +
@@ -44,8 +44,8 @@ const json = (
     }
   })
 
-const rename = (match, fn) =>
-  modify(match, (file) => {
+export const rename = (match: any, fn: any) =>
+  modify(match, (file: any) => {
     const {dir, name, ext} = path.parse(file.path)
     const newPaths = fn(file, {dir, name, ext})
     if (newPaths) {
@@ -53,7 +53,8 @@ const rename = (match, fn) =>
     }
   })
 
-module.exports = modify
 modify.text = text
 modify.json = json
 modify.rename = rename
+
+export default modify

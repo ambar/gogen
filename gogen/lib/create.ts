@@ -1,30 +1,31 @@
-const fs = require('fs')
-const path = require('path')
-const stream = require('stream')
-const {promisify} = require('util')
-const vfs = require('vinyl-fs')
-const colors = require('kleur')
-const prompts = require('prompts')
-const shell = require('./utils/shell')
-const createTempDir = require('./utils/createTempDir')
-const dotgitignore = require('./plugins/dotgitignore')
-const modify = require('./plugins/modify')
-const packages = require('./plugins/packages')
-const template = require('./plugins/template')
-const defaultRc = require('./.gogenrc.default')
+import fs from 'fs'
+import path from 'path'
+import stream from 'stream'
+import {promisify} from 'util'
+import vfs from 'vinyl-fs'
+import colors from 'kleur'
+import prompts from 'prompts'
+import shell from './utils/shell'
+import createTempDir from './utils/createTempDir'
+import dotgitignore from './plugins/dotgitignore'
+import modify from './plugins/modify'
+import packages from './plugins/packages'
+import template from './plugins/template'
+import defaultRc from './.gogenrc.default'
 
-const boolify = (promise) =>
+const boolify = (promise: any) =>
   promise.then(
-    (_) => true,
-    (_) => false
+    (_: any) => true,
+    (_: any) => false
   )
 
 const canUseYarn = async () =>
+  // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'string | undefined' is not assig... Remove this comment to see the full error message
   /yarn/.test(process.env.npm_execpath) || boolify(shell('yarnpkg --version'))
 
 const install = async (
   deps = [],
-  {dev = false, silent = false, cwd, stdio = 'inherit'} = {}
+  {dev = false, silent = false, cwd, stdio = 'inherit'}: any = {}
 ) => {
   const useYarn = await canUseYarn()
   if (useYarn) {
@@ -38,7 +39,7 @@ const install = async (
   }
 }
 
-const npmInit = async (path) => {
+const npmInit = async (path: any) => {
   const useYarn = await canUseYarn()
   await shell(`${useYarn ? 'yarn' : 'npm'} init -y`, {
     cwd: path,
@@ -48,7 +49,7 @@ const npmInit = async (path) => {
 
 const gitInit = async (
   message = 'initial commit',
-  {cwd, stdio = 'ignore'} = {}
+  {cwd, stdio = 'ignore'}: any = {}
 ) => {
   const isInsideWorkTree = () =>
     boolify(
@@ -71,10 +72,10 @@ const gitInit = async (
   }
 }
 
-const partialOptions = (fn, partial) => (arg, options) =>
+const partialOptions = (fn: any, partial: any) => (arg: any, options: any) =>
   fn(arg, {...options, ...partial})
 
-const getPathType = (path) => {
+const getPathType = (path: any) => {
   if (/^[~./]/.test(path)) {
     return 'local'
   }
@@ -84,9 +85,10 @@ const getPathType = (path) => {
   return 'npm'
 }
 
-const downloadFromNpmPackage = async (packagePath) => {
+const downloadFromNpmPackage = async (packagePath: any) => {
   const tempDir = createTempDir({prefix: 'gogen'})
   await npmInit(tempDir)
+  // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
   await install([packagePath], {cwd: tempDir, silent: true})
   const pkg = JSON.parse(fs.readFileSync(path.resolve(tempDir, 'package.json')))
   const depName = Object.keys(pkg.dependencies)[0]
@@ -94,7 +96,7 @@ const downloadFromNpmPackage = async (packagePath) => {
 }
 
 // Used to install from non-npm package, such as monorepo or private hosted repo
-const downloadFromGitRepo = async (repoPath) => {
+const downloadFromGitRepo = async (repoPath: any) => {
   // TODO: support hash, subfolder
   const [repo, tagOrBranch] = repoPath.split('#')
   const tempDir = createTempDir({prefix: 'gogen'})
@@ -108,7 +110,8 @@ const downloadFromGitRepo = async (repoPath) => {
   return tempDir
 }
 
-const create = async (argv, {mock} = {}) => {
+// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'create'.
+const create = async (argv: any, {mock}: any = {}) => {
   const [generator, directory] = argv._
 
   if (!generator) {
@@ -120,7 +123,7 @@ const create = async (argv, {mock} = {}) => {
   }
 
   const pathType = getPathType(generator)
-  let srcPath
+  let srcPath: any
   if (pathType === 'local') {
     srcPath = path.resolve(generator)
   } else {
@@ -149,12 +152,12 @@ const create = async (argv, {mock} = {}) => {
   }
 
   const api = {
-    src: (globs, options) =>
+    src: (globs: any, options: any) =>
       vfs
         .src(defaultIgnore.concat(globs), {cwd: srcPath, dot: true, ...options})
         .pipe(dotgitignore())
         .pipe(packages({name})),
-    dest: (directory = destPath, options) =>
+    dest: (directory = destPath, options: any) =>
       vfs.dest(directory, {cwd: srcPath, ...options}),
     // promisify pipeline, Node v15 has native support
     pipeline: promisify(stream.pipeline),
@@ -186,4 +189,4 @@ const create = async (argv, {mock} = {}) => {
   await boostrap(api, context)
 }
 
-module.exports = create
+export default create

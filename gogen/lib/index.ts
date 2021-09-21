@@ -1,9 +1,9 @@
-const minimist = require('mri')
-const create = require('./create')
-const mock = require('./mock')
+import minimist from 'mri'
+import create from './create'
+import mock from './mock'
 
-const run = async (
-  args,
+export const run = async (
+  args: any,
   usage = 'Usage: npx gogen <generator> <directory>'
 ) => {
   const argv = minimist(args, {
@@ -23,7 +23,6 @@ const run = async (
   }
 }
 
-exports.minimist = minimist
-exports.create = create
-exports.mock = mock
-exports.run = run
+export {minimist}
+export {create}
+export {mock}

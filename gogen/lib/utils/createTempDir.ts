@@ -1,13 +1,13 @@
-const crypto = require('crypto')
-const path = require('path')
-const fs = require('fs')
-const os = require('os')
+import crypto from 'crypto'
+import path from 'path'
+import fs from 'fs'
+import os from 'os'
 
-const createTempDir = ({prefix} = {}) => {
-  const uuid = crypto.randomBytes(16).toString('hex')
+const createTempDir = ({prefix}: any = {}) => {
+  const uuid = (crypto as any).randomBytes(16).toString('hex')
   const tempDir = path.resolve(os.tmpdir(), (prefix ? `${prefix}-` : '') + uuid)
   fs.mkdirSync(tempDir)
   return tempDir
 }
 
-module.exports = createTempDir
+export default createTempDir

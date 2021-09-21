@@ -1,19 +1,19 @@
-const {text} = require('./modify')
-const template = require('lodash.template')
+import {text} from './modify'
+import template from 'lodash.template'
 
-const defaultRender = (content, data, options) =>
-  template(content, options)(data)
+const defaultRender = (content: any, data: any, options: any) =>
+  template(content, options, undefined)(data)
 
 const defaultExt = /\.t(\.\w+)?$/
 
 /**
  * render `*.foo.t` or `*.t.foo` to `*.foo` with lodash template
  */
-module.exports = (
-  data,
-  {ext = defaultExt, test, render = defaultRender, options} = {}
+export default (
+  data: any,
+  {ext = defaultExt, test, render = defaultRender, options}: any = {}
 ) =>
-  text(test || ext, (file, content) => {
+  text(test || ext, (file: any, content: any) => {
     if (!test && ext) {
       file.path = file.path.replace(
         ext,
