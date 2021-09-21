@@ -141,7 +141,14 @@ const create = async (argv, {mock} = {}) => {
 
   const defaultIgnore = ['!**/node_modules', '!**/node_modules/**']
 
-  const go = {
+  // non-stream API
+  let extra = {
+    install: partialOptions(install, {cwd: destPath}),
+    gitInit: partialOptions(gitInit, {cwd: destPath}),
+    prompts,
+  }
+
+  const api = {
     src: (globs, options) =>
       vfs
         .src(defaultIgnore.concat(globs), {cwd: srcPath, dot: true, ...options})
@@ -154,20 +161,20 @@ const create = async (argv, {mock} = {}) => {
     packages,
     modify,
     template,
+    ...extra,
   }
 
   const context = {
+    // TODO: deprecated, remove in next major
+    ...extra,
     path: destPath,
     name,
-    install: partialOptions(install, {cwd: destPath}),
-    gitInit: partialOptions(gitInit, {cwd: destPath}),
-    prompts,
     argv,
   }
 
   if (Array.isArray(mock) && mock.length) {
-    const [mockGo, mockContext] = mock
-    Object.assign(go, mockGo)
+    const [mockAPI, mockContext] = mock
+    Object.assign(api, mockAPI)
     Object.assign(context, mockContext)
   }
 
@@ -176,7 +183,7 @@ const create = async (argv, {mock} = {}) => {
   const boostrap = fs.existsSync(rcFile)
     ? eval('require')(rcFile) // hack to fix webpack error: `Critical dependency: the request of a dependency is an expression`
     : defaultRc
-  await boostrap(go, context)
+  await boostrap(api, context)
 }
 
 module.exports = create

@@ -1,8 +1,8 @@
 const ejs = require('ejs')
 
 module.exports = async (
-  {src, dest, pipeline, template},
-  {install, gitInit, name}
+  {src, dest, pipeline, template, install, gitInit},
+  {name}
 ) => {
   await pipeline(
     src('template/**'),

@@ -1,6 +1,6 @@
 module.exports = async (
-  {src, dest, pipeline, packages},
-  {install, gitInit, prompts}
+  {src, dest, pipeline, packages, install, gitInit},
+  {prompts}
 ) => {
   const {description, devDeps} = await prompts(
     [

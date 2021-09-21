@@ -93,8 +93,8 @@ npm init <your-initializer> <your-project>
 
 `.gogenrc.js`:
 
-- `run(go: Object, context: Object) => void`
-  - `go` vinyl-fs based stream APIs
+- `run(api: Object, context: Object) => void`
+  - `api` core stream and helper APIs
     - `src(glob: string | string[]) => Stream` read files
     - `dest(path?: string) => Stream` write files
     - `pipeline(...streams: Stream[]) => Promise` pipe a series of streams
@@ -104,13 +104,13 @@ npm init <your-initializer> <your-project>
       - `modify.text(match: RegExp | Function, transform: (file, text: string) => text) => Stream` change text files
       - `modify.json(match: RegExp | Function, transform: (file, json: Object) => json) => Stream` change json files
       - `modify.rename(match: RegExp | Function, transform: (file, paths: Object) => paths) => Stream` rename files
+    - `install(deps: string[], {dev: boolean, silent: boolean}) => Promise` install dependencies
+    - `gitInit(message: string) => Promise` init git repository
+    - `prompts(Array | Object) => Promise` see [prompts](https://github.com/terkelg/prompts#-usage)
   - `context` generator context
     - `path: string` new project's path
     - `name: string` new project's name
     - `argv: Object` command line arguments
-    - `install(deps: string[], {dev: boolean, silent: boolean}) => Promise` install dependencies
-    - `gitInit(message: string) => Promise` init git repository
-    - `prompts(Array | Object) => Promise` see [prompts](https://github.com/terkelg/prompts#-usage)
 
 ## Testing
 
