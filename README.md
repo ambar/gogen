@@ -13,7 +13,7 @@ Use [vinyl-fs](https://github.com/gulpjs/vinyl-fs) based stream API to create ge
 - Lightweight, single file bundled (<50K gzip size), no need to install globally, just run `npx`
 - Automatically rename `gitignore` to `.gitignore`, due to [npm/issues/1862](https://github.com/npm/npm/issues/1862)
 - Automatically set `name` field in `package.json`
-- Render `*.foo.t` to `*.foo` with lodash template
+- Render `*.foo.t` or `*.t.foo` to `*.foo` with lodash template
 - Add command line prompts with [prompts](https://github.com/terkelg/prompts#-usage)
 - Add command line arguments with [minimist](https://github.com/substack/minimist)
 - Provide fast, in-memory testing API
@@ -98,7 +98,7 @@ npm init <your-initializer> <your-project>
     - `src(glob: string | string[]) => Stream` read files
     - `dest(path?: string) => Stream` write files
     - `pipeline(...streams: Stream[]) => Promise` pipe a series of streams
-    - `template(data: Object, {ext: RegExp, render: Function}) => Stream` render `*.t` files with [lodash template](https://lodash.com/docs/4.17.11#template)
+    - `template(data: Object, {ext: RegExp, test: RegExp, render: Function}) => Stream` render `*.t` or `*.t.foo` files with [lodash template](https://lodash.com/docs/4.17.11#template)
     - `packages(content: Object | Function) => Stream` change `package.json`
     - `modify(match: RegExp | Function, transform: file => file) => Stream` change files
       - `modify.text(match: RegExp | Function, transform: (file, text: string) => text) => Stream` change text files

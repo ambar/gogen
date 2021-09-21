@@ -6,6 +6,7 @@ test('basic', async () => {
 Array [
   ".eslintrc",
   ".gitignore",
+  "FAQ.md",
   "README.md",
   "index.js",
   "package.json",
