@@ -26,9 +26,8 @@ jobs:
         run: |
           yarn
           yarn jest --coverage
-      # down for maintenance.
-      # - name: report
-      #   uses: coverallsapp/github-action@v1.0.1
-      #   with:
-      #     github-token: ${{ secrets.GITHUB_TOKEN }}
-      #     path-to-lcov: ./coverage/lcov.info
+      - name: report
+        uses: coverallsapp/github-action@v1.0.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./coverage/lcov.info
