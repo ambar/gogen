@@ -14,6 +14,9 @@
     "index.js",
     "cli.js"
   ],
+  "publishConfig": {
+    "main": "dist"
+  },
   "keywords": [
     "gogen",
     "generator",
