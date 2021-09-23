@@ -1,7 +1,7 @@
 {
   "name": "with-prompts",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.1.0",
   "scripts": {
     "gen": "rm -rf dist && gogen . dist"
   }
