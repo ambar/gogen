@@ -1,4 +1,4 @@
-# GoGen
+# gogen
 
 Use stream API to scaffold projects or files.
 
@@ -15,7 +15,6 @@ Use stream API to scaffold projects or files.
 - Automatically set `name` field in `package.json`
 - Render `*.foo.t` or `*.t.foo` to `*.foo` with lodash template
 - Add command line prompts with [prompts](https://github.com/terkelg/prompts#-usage)
-- Add command line arguments with [minimist](https://github.com/substack/minimist)
 - Provide fast, in-memory testing API
 
 ## Usage
@@ -59,7 +58,7 @@ The default directory structure, used in [examples](./examples):
 Edit the `.gogenrc.js` file:
 
 ```js
-module.exports = async ({src, dest, pipeline}, {install, gitInit}) => {
+module.exports = async ({src, dest, pipeline, install, gitInit}) => {
   await pipeline(src('template/**'), dest())
   await install()
   await gitInit()

@@ -4,7 +4,8 @@
   "description": "Use stream API to scaffold projects or files",
   "repository": "ambar/gogen",
   "license": "MIT",
-  "main": "index.js",
+  "source": "lib/index.js",
+  "main": "dist/index.js",
   "bin": "cli.js",
   "engines": {
     "node": ">= 10"
@@ -29,9 +30,10 @@
   "scripts": {
     "prepublishOnly": "npm run build",
     "clean": "rm -rf dist",
-    "build": "npm run build:webpack",
-    "build:ncc": "npm run clean && ncc build lib -o dist -m",
-    "build:webpack": "npm run clean && webpack",
+    "build": "yarn build:esbuild",
+    "build:ncc": "ncc build lib -o dist -m",
+    "build:webpack": "webpack",
+    "build:esbuild": "esbuild $npm_package_source --outfile=$npm_package_main --bundle --minify --platform=node --target=node10 --format=cjs",
     "build:inspect": "SOURCE_MAP=yes yarn build && source-map-explorer dist/index.js"
   },
   "devDependencies": {
@@ -41,8 +43,6 @@
     "minimist": "^1.2.0",
     "prompts": "^1.2.1",
     "through2": "^2.0.0",
-    "vinyl-fs": "^3.0.3",
-    "webpack": "^5.53.0",
-    "webpack-cli": "^4.8.0"
+    "vinyl-fs": "^3.0.3"
   }
 }

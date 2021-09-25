@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 
-require('./index').run(process.argv.slice(2))
+require('./dist').run(process.argv.slice(2))

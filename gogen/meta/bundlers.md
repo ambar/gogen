@@ -1,27 +1,22 @@
 ## Comparison
 
-| name                                            | bundle size | build time                 |
-| ----------------------------------------------- | ----------- | -------------------------- |
-| [@zeit/ncc](https://github.com/zeit/ncc) (v0.7) | 219K        | 2.53s                      |
-| webpack                                         | 192K        | 3287ms, 515ms (with cache) |
-| rollup                                          |             |
+| name                                         | bundle size/gzip | build time |
+| -------------------------------------------- | ---------------- | ---------- |
+| [@vercel/ncc](https://github.com/vercel/ncc) | 188K/49K         | 4.5s       |
+| webpack                                      | 162K/45K         | 4.3s       |
+| rollup + terser                              | 174K/46K         | 5.5s       |
+| esbuild                                      | 168K/49K         | 0.1s       |
 
-ncc versions:
+esbuild:
 
-- `@zeit/ncc@0.5`: 203K, 4.88s
-- `@zeit/ncc@0.7`: 219K, 2.53s
-- `@zeit/ncc@0.8`: 219K, 1.75s (webpack#next)
+- `--bundle` 时无法识别 `paths`: https://github.com/evanw/esbuild/issues/394
+- alias plugin 无法处理子路径引用
 
-Reduce bundle size via [alias](../alias).
+`resolutions` 对 ncc/esbuild 都有效。
 
 ## webpack CLI options
 
 https://webpack.js.org/api/cli/#stats-options
-
-```
---hide-modules
---verbose
-```
 
 ## Tricks
 
