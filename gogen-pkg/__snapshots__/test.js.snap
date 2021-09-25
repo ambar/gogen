@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`gogen 1`] = `
+Array [
+  ".gitignore",
+  ".prettierrc.js",
+  "LICENSE",
+  "README.md",
+  "index.js",
+  "package.json",
+  "test.js",
+]
+`;
+
+exports[`gogen 2`] = `
+Object {
+  "description": "My awesome project",
+  "license": "MIT",
+  "main": "index.js",
+  "name": "mylib",
+  "scripts": Object {},
+  "version": "0.0.0",
+}
+`;

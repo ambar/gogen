@@ -39,6 +39,7 @@ npx gogen <folder> <directory> # folder
   - [examples/basic](./examples/basic/.gogenrc.js)
   - [examples/with-ejs](./examples/with-ejs/.gogenrc.js)
   - [examples/with-prompts](./examples/with-prompts/.gogenrc.js)
+  - [gogen-pkg](./gogen-pkg/.gogenrc.js)
 - npm initializer or starter kits
   - [create-gogen](./create-gogen)
 

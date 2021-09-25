@@ -1,8 +1,12 @@
 {
   "name": "create-gogen",
   "version": "1.1.1",
-  "main": "index.js",
   "license": "MIT",
+  "repository": {
+    "url": "ambar/gogen",
+    "directory": "create-gogen"
+  },
+  "main": "index.js",
   "bin": "cli.js",
   "files": [
     "template",

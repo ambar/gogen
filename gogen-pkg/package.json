@@ -1,0 +1,25 @@
+{
+  "name": "gogen-pkg",
+  "version": "0.0.0",
+  "description": "A Node package generator",
+  "repository": {
+    "url": "ambar/gogen",
+    "directory": "gogen-pkg"
+  },
+  "license": "MIT",
+  "files": [
+    ".gogenrc.js",
+    "template"
+  ],
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "generator",
+    "package",
+    "gogen"
+  ],
+  "devDependencies": {
+    "gogen": "^1"
+  }
+}
