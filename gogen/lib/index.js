@@ -1,4 +1,4 @@
-const minimist = require('minimist')
+const minimist = require('mri')
 const create = require('./create')
 const mock = require('./mock')
 
