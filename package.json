@@ -5,6 +5,7 @@
     "examples/*"
   ],
   "scripts": {
+    "postinstallDev": "yarn prepare",
     "prepare": "yarn workspace gogen run build",
     "dev": "yarn workspace gogen run build:esbuild --watch",
     "test": "jest",
