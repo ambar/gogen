@@ -4,8 +4,6 @@ import getStream from 'get-stream'
 export {SpawnOptions}
 
 // async shell version of `execSync`
-// TODO: use `execa`, removing `semver`: execa -> cross-spwan -> semver (59K)
-// https://github.com/moxystudio/node-cross-spawn
 const shell = async (cmd: string, options: SpawnOptions = {}) => {
   const child = spawn(cmd, {
     shell: true,
