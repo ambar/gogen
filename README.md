@@ -10,7 +10,7 @@ Use stream API to scaffold projects or files.
 
 ## Features
 
-- [vinyl-fs](https://github.com/gulpjs/vinyl-fs) based, [Gulp](https://github.com/gulpjs/gulp)-compatible stream API
+- Simple, easy to use
 - Lightweight, single file bundled (<50K gzip size), no need to install globally, just run `npx`
 - Automatically rename `gitignore` to `.gitignore`, due to [npm/issues/1862](https://github.com/npm/npm/issues/1862)
 - Automatically set `name` field in `package.json`

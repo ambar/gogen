@@ -9,7 +9,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "engines": {
-    "node": ">= 10"
+    "node": ">= 10.3"
   },
   "files": [
     "dist",
@@ -28,20 +28,21 @@
     "prepublishOnly": "yarn build",
     "prebuild": "rm -rf dist",
     "build": "yarn build:esbuild && yarn build:dts",
-    "build:webpack": "webpack",
-    "build:rollup": "rollup -c",
+    "inspect": "source-map-explorer $npm_package_main",
+    "build:esbuild": "esbuild $npm_package_source --outfile=$npm_package_main --bundle --minify --platform=node --target=node10.3 --format=cjs",
+    "build:esbuild-inspect": "yarn build:esbuild --sourcemap && yarn inspect",
     "build:dts": "rollup -c rollup.config.dts.js",
-    "build:ncc": "ncc build lib/index.ts -o dist -m",
-    "build:esbuild": "esbuild $npm_package_source --outfile=$npm_package_main --bundle --minify --platform=node --target=node10 --format=cjs",
-    "build:inspect": "SOURCE_MAP=yes yarn build && source-map-explorer dist/index.js"
+    "build:rollup": "rollup -c",
+    "build:webpack": "webpack",
+    "build:webpack-inspect": "SOURCE_MAP=yes yarn build:webpack && yarn inspect",
+    "build:ncc": "ncc build lib/index.ts -o dist -m"
   },
   "devDependencies": {
     "@types/lodash.template": "^4.5.0",
     "@types/prompts": "^2.0.14",
     "@types/through2": "^2.0.36",
-    "@types/vinyl-fs": "^2.4.12",
     "esbuild": "^0.13.4",
-    "get-stream": "^6.0.1",
+    "fast-glob": "^3.2.7",
     "kleur": "^3.0.0",
     "lodash.template": "^4.4.0",
     "mri": "^1.2.0",
@@ -49,7 +50,6 @@
     "rollup": "^2.56.3",
     "rollup-plugin-dts": "^4.0.0",
     "through2": "^2.0.0",
-    "typescript": "^4.4.3",
-    "vinyl-fs": "^3.0.3"
+    "typescript": "^4.4.3"
   }
 }

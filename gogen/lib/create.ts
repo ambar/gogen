@@ -1,11 +1,15 @@
-import fs from 'fs'
+import {promises as fsp} from 'fs'
 import path from 'path'
-import stream from 'stream'
 import {promisify} from 'util'
-import * as vfs from 'vinyl-fs'
+import stream from 'stream'
+import through2 from 'through2'
+import {VFile} from './vfile'
+import * as fg from 'fast-glob'
+import globParent from 'glob-parent'
 import colors from 'kleur'
 import prompts from 'prompts'
 import {ParsedArgv} from './types'
+import boolify from './utils/boolify'
 import shell from './utils/shell'
 import canUseYarn from './utils/canUseYarn'
 import createTempDir from './utils/createTempDir'
@@ -50,7 +54,7 @@ const downloadFromNpmPackage = async (packagePath: string) => {
   await npmInit(tempDir)
   await install([packagePath], {cwd: tempDir, silent: true})
   const pkg = JSON.parse(
-    fs.readFileSync(path.resolve(tempDir, 'package.json')).toString()
+    (await fsp.readFile(path.resolve(tempDir, 'package.json'))).toString()
   )
   const depName = Object.keys(pkg.dependencies)[0]
   return path.resolve(tempDir, 'node_modules', depName)
@@ -69,6 +73,30 @@ const downloadFromGitRepo = async (repoPath: any) => {
   // optional install dependencies of rc file?
   // await install([], {cwd: tempDir, silent: true})
   return tempDir
+}
+
+let defaultIgnore = ['**/node_modules/**']
+async function* globFiles(
+  globs: string[],
+  {cwd = process.cwd()}: fg.Options = {}
+) {
+  for (let glob of Array.isArray(globs) ? globs : [globs]) {
+    for await (const name of fg.stream(glob, {
+      dot: true,
+      ignore: defaultIgnore,
+      cwd,
+    })) {
+      let filename = path.resolve(cwd, name as string)
+      let file = new VFile()
+      Object.assign(file, {
+        contents: await fsp.readFile(filename),
+        cwd,
+        base: path.resolve(cwd, globParent(glob)),
+        path: filename,
+      })
+      yield file
+    }
+  }
 }
 
 export const loadGenerator = async (argv: ParsedArgv, {mock}: any = {}) => {
@@ -102,8 +130,6 @@ export const loadGenerator = async (argv: ParsedArgv, {mock}: any = {}) => {
   // if (!fs.existsSync(destPath)) { fs.mkdirSync(destPath) }
   // process.chdir(destPath)
 
-  const defaultIgnore = ['!**/node_modules', '!**/node_modules/**']
-
   // non-stream API
   let extra = {
     install: partialOptions(install, {cwd: destPath}) as typeof install,
@@ -112,13 +138,20 @@ export const loadGenerator = async (argv: ParsedArgv, {mock}: any = {}) => {
   }
 
   const api = {
-    src: (globs: string[], options: vfs.SrcOptions) =>
-      vfs
-        .src(defaultIgnore.concat(globs), {cwd: srcPath, dot: true, ...options})
+    src: (globs: string[]) =>
+      stream.Readable.from(globFiles(globs, {cwd: srcPath}))
         .pipe(dotgitignore())
         .pipe(packages({name})),
-    dest: (folder = destPath, options?: vfs.DestOptions) =>
-      vfs.dest(folder, {cwd: srcPath, ...options}),
+    dest: (folder = destPath) =>
+      through2.obj(async (file: VFile, enc: any, next: any) => {
+        let outBase = path.resolve(srcPath, folder)
+        let outPath = path.resolve(outBase, file.relative)
+        file.base = outBase
+        file.path = outPath
+        await fsp.mkdir(file.dirname, {recursive: true})
+        await fsp.writeFile(file.path, file.contents as Buffer)
+        next(null, file)
+      }),
     // Node v15 has native support (`import {pipeline} from 'stream/promises'`)
     pipeline: promisify(stream.pipeline),
     packages,
@@ -143,7 +176,7 @@ export const loadGenerator = async (argv: ParsedArgv, {mock}: any = {}) => {
 
   console.info(`Creating ${colors.green(name)}...`)
   const rcFile = path.resolve(srcPath, '.gogenrc.js')
-  const fn = fs.existsSync(rcFile) ? require(rcFile) : defaultRc
+  const fn = (await boolify(fsp.stat(rcFile))) ? require(rcFile) : defaultRc
   return [fn, api, context] as const
 }
 
