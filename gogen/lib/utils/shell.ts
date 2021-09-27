@@ -1,8 +1,14 @@
 import {spawn, SpawnOptions} from 'child_process'
-import {Stream} from 'stream'
-import getStream from 'get-stream'
+import {Stream, Readable} from 'stream'
 export {SpawnOptions}
 
+async function getStream(stream: Stream) {
+  let data = ''
+  for await (const chunk of stream as Readable) {
+    data += chunk
+  }
+  return data
+}
 // async shell version of `execSync`
 const shell = async (cmd: string, options: SpawnOptions = {}) => {
   const child = spawn(cmd, {
