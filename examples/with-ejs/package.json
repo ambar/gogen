@@ -6,6 +6,7 @@
     "gen": "rm -rf dist && gogen . dist"
   },
   "dependencies": {
-    "ejs": "^2.6.1"
+    "ejs": "^2.6.1",
+    "gogen": "^1.1.1"
   }
 }

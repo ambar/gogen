@@ -1168,6 +1168,8 @@ __metadata:
 "basic@workspace:examples/basic":
   version: 0.0.0-use.local
   resolution: "basic@workspace:examples/basic"
+  dependencies:
+    gogen: ^1.1.1
   languageName: unknown
   linkType: soft
 
@@ -4745,18 +4747,23 @@ typescript@^4.4.3:
   resolution: "with-ejs@workspace:examples/with-ejs"
   dependencies:
     ejs: ^2.6.1
+    gogen: ^1.1.1
   languageName: unknown
   linkType: soft
 
 "with-prompts@workspace:examples/with-prompts":
   version: 0.0.0-use.local
   resolution: "with-prompts@workspace:examples/with-prompts"
+  dependencies:
+    gogen: ^1.1.1
   languageName: unknown
   linkType: soft
 
 "without-gogenrc@workspace:examples/without-gogenrc":
   version: 0.0.0-use.local
   resolution: "without-gogenrc@workspace:examples/without-gogenrc"
+  dependencies:
+    gogen: ^1.1.1
   languageName: unknown
   linkType: soft
 

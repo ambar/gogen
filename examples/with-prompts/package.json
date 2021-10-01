@@ -4,5 +4,8 @@
   "version": "1.1.0",
   "scripts": {
     "gen": "rm -rf dist && gogen . dist"
+  },
+  "dependencies": {
+    "gogen": "^1.1.1"
   }
 }
