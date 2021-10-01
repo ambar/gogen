@@ -1,3 +1,4 @@
+import fs from 'fs'
 import path from 'path'
 import {sync} from 'glob'
 import {mock, run} from '../lib'
@@ -25,11 +26,18 @@ Array [
 })
 
 describe('integration', () => {
-  test('run error', async () => {
+  beforeAll(() => {
     jest.spyOn(console, 'error').mockImplementation(() => {})
     jest.spyOn(process, 'exit').mockImplementation((code) => {
       throw new Error(code)
     })
+  })
+
+  afterAll(() => {
+    jest.restoreAllMocks()
+  })
+
+  test('run error', async () => {
     await expect(run([__dirname], 'usage')).rejects.toThrow(/1/)
     await expect(run([__dirname, ''], 'usage')).rejects.toThrow(/1/)
   })
@@ -38,44 +46,24 @@ describe('integration', () => {
     const dist = createTempDir({prefix: 'gogen'})
     const generator = path.resolve(__dirname, 'fixtures/test-basic')
     await run([generator, dist])
-    expect(sync('**', {cwd: dist, dot: true, ignore: ['.git/*/**']}).sort())
-      .toMatchInlineSnapshot(`
+    const pkg = JSON.parse(fs.readFileSync(path.resolve(dist, 'package.json')))
+    expect(pkg).toMatchObject({
+      description: 'superb',
+      devDependencies: {olt: expect.anything()},
+    })
+    const files = sync('**', {
+      cwd: dist,
+      dot: true,
+      ignore: ['.git/*/**', '.yarn/**'],
+    }).sort()
+    expect(files).toMatchInlineSnapshot(`
 Array [
   ".git",
   ".gitignore",
+  ".pnp.cjs",
   "README.md",
   "index.js",
-  "node_modules",
-  "node_modules/.yarn-integrity",
-  "node_modules/olt",
-  "node_modules/olt/LICENSE",
-  "node_modules/olt/README.md",
-  "node_modules/olt/index.cjs.js",
-  "node_modules/olt/index.js",
-  "node_modules/olt/package.json",
   "package.json",
-  "yarn.lock",
-]
-`)
-  })
-
-  if (process.env.CI) {
-    // TODO: fails GitHub Action CI
-    return
-  }
-
-  test('run ok from npm', async () => {
-    const dist = createTempDir({prefix: 'gogen'})
-    const generator = 'gogen-pkg'
-    await run([generator, dist])
-    expect(sync('**', {cwd: dist}).sort()).toMatchInlineSnapshot(`
-Array [
-  "LICENSE",
-  "README.md",
-  "index.js",
-  "node_modules",
-  "package.json",
-  "test.js",
   "yarn.lock",
 ]
 `)

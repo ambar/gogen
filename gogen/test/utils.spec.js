@@ -9,7 +9,7 @@ test('shell', async () => {
   })
   await expect(shell('yarn xyz')).rejects.toMatchObject({
     code: 1,
-    stderr: expect.stringMatching(/Command "xyz" not found/),
+    stdout: expect.stringMatching(`Couldn't find a script named "xyz"`),
   })
 })
 

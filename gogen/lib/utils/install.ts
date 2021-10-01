@@ -6,6 +6,7 @@ type InstallOptions = Pick<SpawnOptions, 'cwd' | 'stdio'> & {
   dev?: boolean
   /** skip console logs */
   silent?: boolean
+  client?: 'auto' | 'yarn' | 'npm'
 }
 
 /**
@@ -13,14 +14,29 @@ type InstallOptions = Pick<SpawnOptions, 'cwd' | 'stdio'> & {
  */
 const install = async (
   deps: string[] = [],
-  {dev = false, silent = false, cwd, stdio = 'inherit'}: InstallOptions = {}
+  {
+    dev = false,
+    silent = false,
+    cwd,
+    stdio = 'inherit',
+    client = 'auto',
+  }: InstallOptions = {}
 ) => {
-  const useYarn = await canUseYarn()
-  if (useYarn) {
+  if (client === 'auto') {
+    client = (await canUseYarn()) ? 'yarn' : 'npm'
+  }
+  if (client === 'yarn') {
     const args = deps.length ? ['add', ...deps, dev && '--dev'] : []
-    if (silent) args.push('--silent')
+    if (
+      silent &&
+      ((await shell('yarn -v')).stdout?.startsWith('1.') ||
+        // https://github.com/yarnpkg/berry/pull/3406
+        (await shell('yarn add -h')).stdout?.includes('--silent'))
+    ) {
+      args.push('--silent')
+    }
     await shell(`yarn ${args.filter((n) => n).join(' ')}`, {cwd, stdio})
-  } else {
+  } else if (client === 'npm') {
     const args = deps.length ? [...deps, dev && '--save-dev'] : []
     if (silent) args.push('--silent')
     await shell(`npm i ${args.filter((n) => n).join(' ')}`, {cwd, stdio})

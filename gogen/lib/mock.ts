@@ -32,7 +32,7 @@ const mock = async (
 ) => {
   const mfs = createMFS()
   prompts.inject(answers)
-  const noop = () => {}
+  const noop = async () => {}
   const extra = {install: noop, gitInit: noop}
   await create(
     {_: [generator, directory]},
