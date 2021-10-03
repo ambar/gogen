@@ -35,6 +35,8 @@ const install = async (
     ) {
       args.push('--silent')
     }
+    // https://github.com/yarnpkg/berry/issues/1050#issuecomment-596659082
+    await shell(`touch yarn.lock`, {cwd, stdio})
     await shell(`yarn ${args.filter((n) => n).join(' ')}`, {cwd, stdio})
   } else if (client === 'npm') {
     const args = deps.length ? [...deps, dev && '--save-dev'] : []
