@@ -1,11 +1,11 @@
 {
   "name": "without-gogenrc",
   "private": true,
-  "version": "1.1.0",
+  "version": "2.0.0",
   "scripts": {
     "gen": "rm -rf dist && gogen . dist"
   },
   "dependencies": {
-    "gogen": "^1.1.1"
+    "gogen": "^2.0.0"
   }
 }
