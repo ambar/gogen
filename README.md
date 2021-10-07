@@ -2,7 +2,7 @@
 
 Use stream API to scaffold projects or files.
 
-[![Coverage Status](https://coveralls.io/repos/github/ambar/gogen/badge.svg?branch=master)](https://coveralls.io/github/ambar/gogen?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/ambar/gogen/badge.svg?branch=main)](https://coveralls.io/github/ambar/gogen?branch=main)
 [![npm version](https://badgen.net/npm/v/gogen)](https://www.npmjs.com/package/gogen)
 ![](https://badgen.net/npm/types/gogen)
 [![install size](https://badgen.net/packagephobia/install/gogen)](https://packagephobia.now.sh/result?p=gogen)
