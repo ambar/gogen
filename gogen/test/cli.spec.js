@@ -13,7 +13,7 @@ describe('mock', () => {
 
   test('mock ok', async () => {
     const generator = path.resolve(__dirname, 'fixtures/test-basic')
-    const {files} = await mock(generator, 'mylib')
+    const {files, readFile} = await mock(generator, 'mylib')
     expect(files).toMatchInlineSnapshot(`
 Array [
   ".gitignore",
@@ -22,6 +22,7 @@ Array [
   "package.json",
 ]
 `)
+    expect(readFile('package.json')).toMatch(/mylib/)
   })
 })
 
