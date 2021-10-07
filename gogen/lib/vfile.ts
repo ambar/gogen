@@ -17,6 +17,8 @@ const assertNoneEmptyString = (v: string) => {
  * Virtual File
  *
  * Like simplified vinyl, no dependencies.
+ *
+ * TODO: extends Blob (Node v15): https://nodejs.org/api/buffer.html#buffer_class_blob
  */
 export class VFile {
   #base: string = ''
