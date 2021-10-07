@@ -130,7 +130,7 @@ export const loadGenerator = async (argv: ParsedArgv, {mock}: any = {}) => {
   // if (!fs.existsSync(destPath)) { fs.mkdirSync(destPath) }
   // process.chdir(destPath)
 
-  // non-stream API
+  // utils, non-stream API
   let extra = {
     install: partialOptions(install, {cwd: destPath}) as typeof install,
     gitInit: partialOptions(gitInit, {cwd: destPath}) as typeof gitInit,
@@ -161,8 +161,6 @@ export const loadGenerator = async (argv: ParsedArgv, {mock}: any = {}) => {
   }
 
   const context = {
-    // TODO: deprecated, remove in next major
-    ...extra,
     path: destPath,
     name,
     argv,

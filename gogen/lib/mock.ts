@@ -28,18 +28,17 @@ const createMFS = () => {
 const mock = async (
   generator: string,
   directory: string,
-  {answers = {}, context}: any = {}
+  {answers = {}, api, context}: any = {}
 ) => {
   const mfs = createMFS()
   prompts.inject(answers)
   const noop = async () => {}
-  const extra = {install: noop, gitInit: noop}
   await create(
     {_: [generator, directory]},
     {
       mock: [
-        {...extra, dest: mfs.dest},
-        {...extra, ...context},
+        {install: noop, gitInit: noop,...api, dest: mfs.dest},
+        {...context},
       ],
     }
   )
