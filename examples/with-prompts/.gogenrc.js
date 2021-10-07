@@ -42,6 +42,6 @@ module.exports = async ({
     }),
     dest()
   )
-  await install(devDeps, {dev: true}).catch(console.warn)
+  await install(devDeps, {dev: true})
   await gitInit()
 }

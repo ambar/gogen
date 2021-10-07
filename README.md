@@ -14,8 +14,9 @@ Use stream API to scaffold projects or files.
 - Lightweight, single file bundled (<50K gzip size), no need to install globally, just run `npx`
 - Automatically rename `gitignore` to `.gitignore`, due to [npm/issues/1862](https://github.com/npm/npm/issues/1862)
 - Automatically set `name` field in `package.json`
-- Render `*.foo.t` or `*.t.foo` to `*.foo` with lodash template
+- Automatically parse command line arguments with [mri](https://www.npmjs.com/package/mri)
 - Add command line prompts with [prompts](https://github.com/terkelg/prompts#-usage)
+- Render `*.t.foo` (or `*.foo.t`) to `*.foo` with lodash template
 - Provide fast, in-memory testing API
 
 ## Usage
@@ -116,7 +117,7 @@ npm init <your-initializer> <your-project>
   - `context` generator context
     - `path: string` new project's path
     - `name: string` new project's name
-    - `argv: Object` command line arguments
+    - `argv: Object` command line arguments, parsed by [mri](https://www.npmjs.com/package/mri)
 
 ## Testing
 

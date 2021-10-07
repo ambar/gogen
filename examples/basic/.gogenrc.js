@@ -11,7 +11,6 @@ module.exports = async (
     template({name, description: 'My [gogen](#) project'}),
     dest()
   )
-  // yarn v2+ cannot run, because it thinks the `dist` folder is also part of this monorepo
-  await install(['olt'], {dev: true, silent: true}).catch(console.warn)
+  await install(['olt'], {dev: true, silent: true})
   await gitInit()
 }
