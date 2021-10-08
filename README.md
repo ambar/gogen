@@ -44,6 +44,7 @@ npx gogen <folder> <directory> # folder
   - [gogen-pkg](./gogen-pkg/.gogenrc.js)
 - npm initializer or starter kits
   - [create-gogen](./create-gogen)
+  - [new-mina](https://github.com/ambar/new-mina/blob/main/packages/new-mina/.gogenrc.js) CRA-like initializer in 12 lines.
 
 ### Create generator
 
