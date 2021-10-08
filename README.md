@@ -6,12 +6,12 @@ Use stream API to scaffold projects or files.
 [![npm version](https://badgen.net/npm/v/gogen)](https://www.npmjs.com/package/gogen)
 ![](https://badgen.net/npm/types/gogen)
 [![install size](https://badgen.net/packagephobia/install/gogen)](https://packagephobia.now.sh/result?p=gogen)
-[![minzipped size](https://badgen.net/bundlephobia/minzip/gogen)](https://bundlephobia.com/result?p=gogen)
+[![minzipped size](https://badgen.net/bundlephobia/minzip/gogen?scale=1&cache=36000)](https://bundlephobia.com/result?p=gogen)
 
 ## Features
 
 - Simple, easy to use
-- Lightweight, single file bundled (<50K gzip size), no need to install globally, just run `npx`
+- Lightweight, single file bundled (<40K gzip size), no need to install globally, just run `npx`
 - Automatically rename `gitignore` to `.gitignore`, due to [npm/issues/1862](https://github.com/npm/npm/issues/1862)
 - Automatically set `name` field in `package.json`
 - Automatically parse command line arguments with [mri](https://www.npmjs.com/package/mri)
@@ -146,5 +146,5 @@ it('generate correctly', async () => {
 | Library                                 | Package Phobia                                                                                                 |
 | --------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | [gogen](https://github.com/ambar/gogen) | [![install size](https://badgen.net/packagephobia/install/gogen)](https://packagephobia.now.sh/result?p=gogen) |
-| [sao](https://saojs.org/)               | [![install size](https://badgen.net/packagephobia/install/sao)](https://packagephobia.now.sh/result?p=sao)     |
-| [yeoman](https://yeoman.io)             | [![install size](https://badgen.net/packagephobia/install/yo)](https://packagephobia.now.sh/result?p=yo)       |
+| [sao](https://github.com/saojs/sao)     | [![install size](https://badgen.net/packagephobia/install/sao)](https://packagephobia.now.sh/result?p=sao)     |
+| [yeoman](https://github.com/yeoman/yo)  | [![install size](https://badgen.net/packagephobia/install/yo)](https://packagephobia.now.sh/result?p=yo)       |
