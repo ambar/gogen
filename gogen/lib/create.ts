@@ -40,7 +40,7 @@ const getPathType = (path: any) => {
   return 'npm'
 }
 
-let defaultIgnore = ['**/node_modules/**']
+let defaultIgnore = ['**/node_modules/**', '**/.git', '**/.DS_Store']
 async function* globFiles(
   globs: string[],
   {cwd = process.cwd()}: fg.Options = {}
