@@ -10,9 +10,8 @@ import colors from 'kleur'
 import prompts from 'prompts'
 import {ParsedArgv} from './types'
 import boolify from './utils/boolify'
-import shell from './utils/shell'
-import canUseYarn from './utils/canUseYarn'
-import createTempDir from './utils/createTempDir'
+import downloadNpmPackage from './utils/downloadNpmPackage'
+import downloadGitRepo from './utils/downloadGitRepo'
 import gitInit from './utils/gitInit'
 import install from './utils/install'
 import dotgitignore from './plugins/dotgitignore'
@@ -28,14 +27,6 @@ type ReturnPair = Awaited<ReturnType<typeof loadGenerator>>
 export type API = ReturnPair[1]
 export type Context = Omit<ReturnPair[2], 'install' | 'gitInit' | 'prompts'>
 
-const npmInit = async (path: any) => {
-  const useYarn = await canUseYarn()
-  await shell(`${useYarn ? 'yarn' : 'npm'} init -y`, {
-    cwd: path,
-    stdio: 'ignore',
-  })
-}
-
 const partialOptions = (fn: any, partial: any) => (arg: any, options: any) =>
   fn(arg, {...options, ...partial})
 
@@ -47,32 +38,6 @@ const getPathType = (path: any) => {
   // - https://docs.npmjs.com/cli/install#synopsis
   // - https://yarnpkg.com/lang/en/docs/cli/add/
   return 'npm'
-}
-
-const downloadFromNpmPackage = async (packagePath: string) => {
-  const tempDir = createTempDir({prefix: 'gogen'})
-  await npmInit(tempDir)
-  await install([packagePath], {cwd: tempDir, silent: true})
-  const pkg = JSON.parse(
-    (await fsp.readFile(path.resolve(tempDir, 'package.json'))).toString()
-  )
-  const depName = Object.keys(pkg.dependencies)[0]
-  return path.resolve(tempDir, 'node_modules', depName)
-}
-
-// Used to install from non-npm package, such as monorepo or private hosted repo
-const downloadFromGitRepo = async (repoPath: any) => {
-  // TODO: support hash, subfolder
-  const [repo, tagOrBranch] = repoPath.split('#')
-  const tempDir = createTempDir({prefix: 'gogen'})
-  await shell(
-    `git clone --single-branch ${
-      tagOrBranch ? `--branch ${tagOrBranch}` : ''
-    } ${repo} ${tempDir}`
-  )
-  // optional install dependencies of rc file?
-  // await install([], {cwd: tempDir, silent: true})
-  return tempDir
 }
 
 let defaultIgnore = ['**/node_modules/**']
@@ -116,9 +81,9 @@ export const loadGenerator = async (argv: ParsedArgv, {mock}: any = {}) => {
     srcPath = path.resolve(generator)
   } else {
     if (argv.clone) {
-      srcPath = await downloadFromGitRepo(generator)
+      srcPath = await downloadGitRepo(generator)
     } else {
-      srcPath = await downloadFromNpmPackage(generator)
+      srcPath = await downloadNpmPackage(generator)
     }
   }
 
