@@ -4,7 +4,10 @@ import lodashTemplate from 'lodash.template'
 const defaultRender = (content: string, data: object, options?: object) =>
   lodashTemplate(content, options)(data)
 
-const defaultExt = /\.t(\.\w+)?$/
+// .rc.t.js -> .rc.js
+// .rc.t -> .rc
+// .t.rc -> .rc
+const defaultExt = /(\.t)(\.\w+)?$/
 
 type TemplateOptions = {
   /** The regular expression to match files, file extension will be stripped */
@@ -29,11 +32,11 @@ const template = (
     options,
   }: TemplateOptions = {}
 ) =>
-  text(test || ext, (file: any, content: any) => {
+  text(test || ext, (file, content) => {
     if (!test && ext) {
       file.path = file.path.replace(
         ext,
-        ext === defaultExt && file.path.match(ext).length > 1 ? '$1' : ''
+        ext === defaultExt ? (_, _1, _2) => _2 ?? '' : ''
       )
     }
     return render(content, data, options)

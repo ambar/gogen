@@ -35,6 +35,8 @@ Array [
   ".git",
   ".gitignore",
   ".pnp.cjs",
+  ".rc",
+  ".rc.js",
   "README.md",
   "index.js",
   "package.json",
