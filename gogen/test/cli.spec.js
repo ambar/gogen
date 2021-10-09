@@ -4,40 +4,33 @@ import glob from 'glob'
 import run from '../lib/run'
 import createTempDir from '../lib/utils/createTempDir'
 
-describe('integration', () => {
-  beforeAll(() => {
-    jest.spyOn(console, 'error').mockImplementation(() => {})
-    jest.spyOn(process, 'exit').mockImplementation((code) => {
-      throw new Error(code)
+test('run error', async () => {
+  jest.spyOn(console, 'error').mockImplementation(() => {})
+  jest.spyOn(process, 'exit').mockImplementation((code) => {
+    throw new Error(code)
+  })
+  await expect(run([__dirname], 'usage')).rejects.toThrow(/1/)
+  await expect(run([__dirname, ''], 'usage')).rejects.toThrow(/1/)
+  jest.restoreAllMocks()
+})
+
+test('run ok from local', async () => {
+  const dist = createTempDir({prefix: 'gogen'})
+  const generator = path.resolve(__dirname, 'fixtures/test-basic')
+  await run([generator, dist])
+  const pkg = JSON.parse(fs.readFileSync(path.resolve(dist, 'package.json')))
+  expect(pkg).toMatchObject({
+    description: 'superb',
+    devDependencies: {olt: expect.anything()},
+  })
+  const files = glob
+    .sync('**', {
+      cwd: dist,
+      dot: true,
+      ignore: ['.git/*/**', '.yarn/**'],
     })
-  })
-
-  afterAll(() => {
-    jest.restoreAllMocks()
-  })
-
-  test('run error', async () => {
-    await expect(run([__dirname], 'usage')).rejects.toThrow(/1/)
-    await expect(run([__dirname, ''], 'usage')).rejects.toThrow(/1/)
-  })
-
-  test('run ok from local', async () => {
-    const dist = createTempDir({prefix: 'gogen'})
-    const generator = path.resolve(__dirname, 'fixtures/test-basic')
-    await run([generator, dist])
-    const pkg = JSON.parse(fs.readFileSync(path.resolve(dist, 'package.json')))
-    expect(pkg).toMatchObject({
-      description: 'superb',
-      devDependencies: {olt: expect.anything()},
-    })
-    const files = glob
-      .sync('**', {
-        cwd: dist,
-        dot: true,
-        ignore: ['.git/*/**', '.yarn/**'],
-      })
-      .sort()
-    expect(files).toMatchInlineSnapshot(`
+    .sort()
+  expect(files).toMatchInlineSnapshot(`
 Array [
   ".git",
   ".gitignore",
@@ -48,5 +41,4 @@ Array [
   "yarn.lock",
 ]
 `)
-  })
 })
