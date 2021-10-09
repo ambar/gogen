@@ -1,30 +1,8 @@
 import fs from 'fs'
 import path from 'path'
-import {sync} from 'glob'
-import {mock, run} from '../lib'
+import glob from 'glob'
+import run from '../lib/run'
 import createTempDir from '../lib/utils/createTempDir'
-
-describe('mock', () => {
-  test('should throw errors', async () => {
-    await expect(mock('', '')).rejects.toThrow()
-    await expect(mock('foo', '')).rejects.toThrow()
-    await expect(mock('', 'foo')).rejects.toThrow()
-  })
-
-  test('mock ok', async () => {
-    const generator = path.resolve(__dirname, 'fixtures/test-basic')
-    const {files, readFile} = await mock(generator, 'mylib')
-    expect(files).toMatchInlineSnapshot(`
-Array [
-  ".gitignore",
-  "README.md",
-  "index.js",
-  "package.json",
-]
-`)
-    expect(readFile('package.json')).toMatch(/mylib/)
-  })
-})
 
 describe('integration', () => {
   beforeAll(() => {
@@ -52,11 +30,13 @@ describe('integration', () => {
       description: 'superb',
       devDependencies: {olt: expect.anything()},
     })
-    const files = sync('**', {
-      cwd: dist,
-      dot: true,
-      ignore: ['.git/*/**', '.yarn/**'],
-    }).sort()
+    const files = glob
+      .sync('**', {
+        cwd: dist,
+        dot: true,
+        ignore: ['.git/*/**', '.yarn/**'],
+      })
+      .sort()
     expect(files).toMatchInlineSnapshot(`
 Array [
   ".git",
