@@ -13,6 +13,7 @@ test('mock ok', async () => {
   expect(files).toMatchInlineSnapshot(`
 Array [
   ".gitignore",
+  ".rc",
   "README.md",
   "index.js",
   "package.json",
