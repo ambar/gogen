@@ -6,7 +6,7 @@
   ],
   "scripts": {
     "prepare": "yarn build",
-    "build": "yarn workspace gogen run build",
+    "build": "yarn workspaces foreach run build",
     "dev": "yarn workspace gogen run build:esbuild --watch",
     "test": "jest",
     "test:coverage": "jest --coverage",
