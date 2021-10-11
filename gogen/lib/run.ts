@@ -4,11 +4,13 @@ import create from './create'
 
 const run = async (
   args: string[],
-  usage = 'Usage: npx gogen <generator> <directory>'
+  usage = 'Usage: npx gogen <generator> <directory>',
+  opts: mri.Options
 ) => {
   const argv = mri<Argv>(args, {
     alias: {c: 'clone'},
     boolean: ['clone'],
+    ...opts,
   })
   if (argv._.length < 2) {
     console.error(usage)

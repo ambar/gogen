@@ -1310,6 +1310,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cli-run@workspace:examples/cli-run":
+  version: 0.0.0-use.local
+  resolution: "cli-run@workspace:examples/cli-run"
+  dependencies:
+    gogen: ^2.1.0
+  bin:
+    cli-run: cli.js
+  languageName: unknown
+  linkType: soft
+
 "cliui@npm:^7.0.2":
   version: 7.0.4
   resolution: "cliui@npm:7.0.4"
