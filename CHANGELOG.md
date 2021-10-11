@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/ambar/gogen/compare/v2.0.0...v2.1.0) (2021-10-11)
+
+
+### Features
+
+* allow change context value (name or path) on the fly ([dabec0f](https://github.com/ambar/gogen/commit/dabec0fec62e34ff790fa8976c25818681d1a2f8))
+* ignore .git and .DS_Store ([dfb8e07](https://github.com/ambar/gogen/commit/dfb8e0799d42279a738484afbeb323ef0f2e1f8f))
+
+
+
+
+
 # [2.0.0](https://github.com/ambar/gogen/compare/v1.1.1...v2.0.0) (2021-10-07)
 
 

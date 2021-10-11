@@ -1,11 +1,11 @@
 {
   "name": "with-prompts",
   "private": true,
-  "version": "2.0.0",
+  "version": "2.1.0",
   "scripts": {
     "gen": "rm -rf dist && gogen . dist"
   },
   "dependencies": {
-    "gogen": "^2.0.0"
+    "gogen": "^2.1.0"
   }
 }
