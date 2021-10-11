@@ -1,7 +1,7 @@
-const boolify = (promise: Promise<any>) =>
+const boolify = (promise: Promise<unknown>) =>
   promise.then(
-    (_: any) => true,
-    (_: any) => false
+    () => true,
+    () => false
   )
 
 export default boolify

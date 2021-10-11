@@ -20,5 +20,21 @@ Array [
   "package.json",
 ]
 `)
-  expect(readFile('package.json')).toMatch(/mylib/)
+  expect(JSON.parse(readFile('package.json'))).toMatchObject({
+    name: 'mylib',
+  })
+})
+
+test('change context', async () => {
+  const generator = path.resolve(__dirname, 'fixtures/change-context')
+  const {files, readFile} = await mock(generator, 'mylib')
+  expect(files).toMatchInlineSnapshot(`
+Array [
+  "README.md",
+  "package.json",
+]
+`)
+  expect(JSON.parse(readFile('package.json'))).toMatchObject({
+    name: 'prefix-mylib',
+  })
 })

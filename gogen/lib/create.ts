@@ -1,3 +1,4 @@
+import assert from 'assert'
 import {promises as fsp} from 'fs'
 import path from 'path'
 import {promisify} from 'util'
@@ -27,9 +28,6 @@ type ReturnPair = Awaited<ReturnType<typeof loadGenerator>>
 export type API = ReturnPair[1]
 export type Context = Omit<ReturnPair[2], 'install' | 'gitInit' | 'prompts'>
 
-const partialOptions = (fn: any, partial: any) => (arg: any, options: any) =>
-  fn(arg, {...options, ...partial})
-
 const getPathType = (path: any) => {
   if (/^[~./]/.test(path)) {
     return 'local'
@@ -39,6 +37,9 @@ const getPathType = (path: any) => {
   // - https://yarnpkg.com/lang/en/docs/cli/add/
   return 'npm'
 }
+
+const stringRequired = (v: unknown) =>
+  assert.ok(typeof v === 'string' && v !== '')
 
 let defaultIgnore = ['**/node_modules/**', '**/.git', '**/.DS_Store']
 async function* globFiles(
@@ -87,18 +88,31 @@ export const loadGenerator = async (argv: ParsedArgv, {mock}: any = {}) => {
     }
   }
 
-  // dest path
-  const destPath = path.resolve(directory)
-  const name = path.basename(destPath)
-
-  // TODO: change cwd to dest path?
-  // if (!fs.existsSync(destPath)) { fs.mkdirSync(destPath) }
-  // process.chdir(destPath)
+  let _path = path.resolve(directory)
+  const context = {
+    get path() {
+      return _path
+    },
+    set path(v) {
+      stringRequired(v)
+      _path = path.resolve(v)
+    },
+    get name() {
+      return path.basename(context.path)
+    },
+    set name(v) {
+      stringRequired(v)
+      context.path = path.format({...path.parse(context.path), base: v})
+    },
+    argv,
+  }
 
   // utils, non-stream API
   let extra = {
-    install: partialOptions(install, {cwd: destPath}) as typeof install,
-    gitInit: partialOptions(gitInit, {cwd: destPath}) as typeof gitInit,
+    install: ((arg, opts) =>
+      install(arg, {cwd: context.path, ...opts})) as typeof install,
+    gitInit: ((arg, opts) =>
+      gitInit(arg, {cwd: context.path, ...opts})) as typeof gitInit,
     prompts,
   }
 
@@ -106,17 +120,24 @@ export const loadGenerator = async (argv: ParsedArgv, {mock}: any = {}) => {
     src: (globs: string[]) =>
       stream.Readable.from(globFiles(globs, {cwd: srcPath}))
         .pipe(dotgitignore())
-        .pipe(packages({name})),
-    dest: (folder = destPath) =>
-      through2.obj(async (file: VFile, enc: any, next: any) => {
-        let outBase = path.resolve(srcPath, folder)
+        .pipe(packages({name: context.name})),
+    dest: (folder: string) => {
+      folder = folder ?? context.path
+      if (folder !== context.path) {
+        context.path = folder
+      }
+      console.info(`Creating ${colors.green(context.name)}...`)
+      return through2.obj(async (file: VFile, _enc, next) => {
+        let outBase = path.resolve(srcPath, context.path)
         let outPath = path.resolve(outBase, file.relative)
         file.base = outBase
         file.path = outPath
+        // TODO: add log
         await fsp.mkdir(file.dirname, {recursive: true})
         await fsp.writeFile(file.path, file.contents as Buffer)
         next(null, file)
-      }),
+      })
+    },
     // Node v15 has native support (`import {pipeline} from 'stream/promises'`)
     pipeline: promisify(stream.pipeline),
     packages,
@@ -125,19 +146,12 @@ export const loadGenerator = async (argv: ParsedArgv, {mock}: any = {}) => {
     ...extra,
   }
 
-  const context = {
-    path: destPath,
-    name,
-    argv,
-  }
-
   if (Array.isArray(mock) && mock.length) {
     const [mockAPI, mockContext] = mock
     Object.assign(api, mockAPI)
     Object.assign(context, mockContext)
   }
 
-  console.info(`Creating ${colors.green(name)}...`)
   const rcFile = path.resolve(srcPath, '.gogenrc.js')
   const fn = (await boolify(fsp.stat(rcFile))) ? require(rcFile) : defaultRc
   return [fn, api, context] as const

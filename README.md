@@ -116,8 +116,8 @@ npm init <your-initializer> <your-project>
     - `gitInit(message: string) => Promise` init git repository
     - `prompts(Array | Object) => Promise` see [prompts](https://github.com/terkelg/prompts#-usage)
   - `context` generator context
-    - `path: string` new project's path
-    - `name: string` new project's name
+    - `path: string` new project's path (it's also a setter)
+    - `name: string` new project's name (it's also a setter)
     - `argv: Object` command line arguments, parsed by [mri](https://www.npmjs.com/package/mri)
 
 ## Testing
