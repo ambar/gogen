@@ -1139,7 +1139,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "basic@workspace:examples/basic"
   dependencies:
-    gogen: ^2.0.0
+    gogen: ^2.1.0
   languageName: unknown
   linkType: soft
 
@@ -1417,7 +1417,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "create-gogen@workspace:create-gogen"
   dependencies:
-    gogen: ^2.0.0
+    gogen: ^2.1.0
   bin:
     create-gogen: cli.js
   languageName: unknown
@@ -2088,11 +2088,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "gogen-pkg@workspace:gogen-pkg"
   dependencies:
-    gogen: ^2.0.0
+    gogen: ^2.1.0
   languageName: unknown
   linkType: soft
 
-"gogen@^2.0.0, gogen@workspace:gogen":
+"gogen@^2.1.0, gogen@workspace:gogen":
   version: 0.0.0-use.local
   resolution: "gogen@workspace:gogen"
   dependencies:
@@ -4339,7 +4339,7 @@ typescript@^4.4.3:
   resolution: "with-ejs@workspace:examples/with-ejs"
   dependencies:
     ejs: ^2.6.1
-    gogen: ^2.0.0
+    gogen: ^2.1.0
   languageName: unknown
   linkType: soft
 
@@ -4347,7 +4347,7 @@ typescript@^4.4.3:
   version: 0.0.0-use.local
   resolution: "with-prompts@workspace:examples/with-prompts"
   dependencies:
-    gogen: ^2.0.0
+    gogen: ^2.1.0
   languageName: unknown
   linkType: soft
 
@@ -4355,7 +4355,7 @@ typescript@^4.4.3:
   version: 0.0.0-use.local
   resolution: "without-gogenrc@workspace:examples/without-gogenrc"
   dependencies:
-    gogen: ^2.0.0
+    gogen: ^2.1.0
   languageName: unknown
   linkType: soft
 
