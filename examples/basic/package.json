@@ -1,11 +1,11 @@
 {
   "name": "basic",
   "private": true,
-  "version": "2.1.0",
+  "version": "2.2.0",
   "scripts": {
     "gen": "rm -rf dist && gogen . dist"
   },
   "dependencies": {
-    "gogen": "^2.1.0"
+    "gogen": "^2.2.0"
   }
 }
