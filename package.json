@@ -21,7 +21,7 @@
     "modulePathIgnorePatterns": [
       "/examples/.*/dist",
       "/examples/.*/template",
-      "/gogen/test/fixtures/.*/template"
+      "/gogen/test/fixtures/.*"
     ]
   },
   "resolutions": {

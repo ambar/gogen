@@ -7,7 +7,9 @@ run(
 )
 
 // OR
-// const {create} = require('gogen')
-// create({
-//   _: [__dirname, ...process.argv.slice(2)],
-// })
+// const {create, minimist} = require('gogen')
+// create(
+//   minimist([__dirname, ...process.argv.slice(2)], {
+//     boolean: ['myflag']
+//   })
+// )
