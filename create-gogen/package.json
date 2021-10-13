@@ -1,6 +1,6 @@
 {
   "name": "create-gogen",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "license": "MIT",
   "repository": {
     "url": "ambar/gogen",
@@ -17,6 +17,6 @@
     "gogen"
   ],
   "dependencies": {
-    "gogen": "^2.2.0"
+    "gogen": "^2.2.1"
   }
 }

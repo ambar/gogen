@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.1](https://github.com/ambar/gogen/compare/v2.2.0...v2.2.1) (2021-10-13)
+
+
+### Bug Fixes
+
+* replace touch with fs.writeFIle ([2d1e9be](https://github.com/ambar/gogen/commit/2d1e9be38c081d3c08af1757d990263f67d57dd3))
+
+
+
+
+
 # [2.2.0](https://github.com/ambar/gogen/compare/v2.1.0...v2.2.0) (2021-10-12)
 
 

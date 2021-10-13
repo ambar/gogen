@@ -1,6 +1,6 @@
 {
   "name": "gogen",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Use stream API to scaffold projects or files",
   "repository": "ambar/gogen",
   "license": "MIT",

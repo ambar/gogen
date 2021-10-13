@@ -1,12 +1,12 @@
 {
   "name": "cli-run",
   "private": true,
-  "version": "2.2.0",
+  "version": "2.2.1",
   "bin": "cli.js",
   "scripts": {
     "gen": "rm -rf dist && npx cli-run dist"
   },
   "dependencies": {
-    "gogen": "^2.2.0"
+    "gogen": "^2.2.1"
   }
 }
