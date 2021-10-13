@@ -1,5 +1,14 @@
+import path from 'path'
+import {promises as fs} from 'fs'
+import boolify from './boolify'
 import canUseYarn from './canUseYarn'
 import shell, {SpawnOptions} from './shell'
+
+const createFileIfNeeded = async (file: string) => {
+  if (!(await boolify(fs.stat(file)))) {
+    await fs.writeFile(file, '')
+  }
+}
 
 type InstallOptions = Pick<SpawnOptions, 'cwd' | 'stdio'> & {
   /** install to `devDependencies` */
@@ -36,7 +45,7 @@ const install = async (
       args.push('--silent')
     }
     // https://github.com/yarnpkg/berry/issues/1050#issuecomment-596659082
-    await shell(`touch yarn.lock`, {cwd, stdio})
+    await createFileIfNeeded(path.resolve(String(cwd) ?? '', 'yarn.lock'))
     await shell(`yarn ${args.filter((n) => n).join(' ')}`, {cwd, stdio})
   } else if (client === 'npm') {
     const args = deps.length ? [...deps, dev && '--save-dev'] : []
