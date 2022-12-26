@@ -103,7 +103,7 @@ npm init <your-initializer> <your-project>
 
 - `run(api: Object, context: Object) => void`
   - `api` core stream and helper APIs
-    - `src(glob: string | string[]) => Stream` read files
+    - `src(glob: string | string[], options: fg.Options) => Stream` read files, support [fast-glob](https://github.com/mrmlnc/fast-glob#options-3) options
     - `dest(path?: string) => Stream` write files
     - `pipeline(...streams: Stream[]) => Promise` pipe a series of streams
     - `template(data: Object, {ext: RegExp, test: RegExp, render: Function}) => Stream` render `*.t` or `*.t.foo` files with [lodash template](https://lodash.com/docs/4.17.11#template)

@@ -42,14 +42,13 @@ const stringRequired = (v: unknown) =>
   assert.ok(typeof v === 'string' && v !== '')
 
 let defaultIgnore = ['**/node_modules/**', '**/.git', '**/.DS_Store']
-async function* globFiles(
-  globs: string[],
-  {cwd = process.cwd()}: fg.Options = {}
-) {
+async function* globFiles(globs: string[], options: fg.Options) {
+  const cwd = options.cwd || process.cwd()
   for (let glob of Array.isArray(globs) ? globs : [globs]) {
     for await (const name of fg.stream(glob, {
       dot: true,
       ignore: defaultIgnore,
+      ...options,
       cwd,
     })) {
       let filename = path.resolve(cwd, name as string)
@@ -117,8 +116,8 @@ export const loadGenerator = async (argv: ParsedArgv, {mock}: any = {}) => {
   }
 
   const api = {
-    src: (globs: string[]) =>
-      stream.Readable.from(globFiles(globs, {cwd: srcPath}))
+    src: (globs: string[], options: fg.Options = {}) =>
+      stream.Readable.from(globFiles(globs, {cwd: srcPath, ...options}))
         .pipe(dotgitignore())
         .pipe(packages({name: context.name})),
     dest: (folder: string) => {
