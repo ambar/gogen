@@ -3212,11 +3212,11 @@ __metadata:
   linkType: hard
 
 "minimatch@npm:^3.0.4":
-  version: 3.0.4
-  resolution: "minimatch@npm:3.0.4"
+  version: 3.1.2
+  resolution: "minimatch@npm:3.1.2"
   dependencies:
     brace-expansion: ^1.1.7
-  checksum: 66ac295f8a7b59788000ea3749938b0970344c841750abd96694f80269b926ebcafad3deeb3f1da2522978b119e6ae3a5869b63b13a7859a456b3408bd18a078
+  checksum: c154e566406683e7bcb746e000b84d74465b3a832c45d59912b9b55cd50dee66e5c4b1e5566dba26154040e51672f9aa450a9aef0c97cfc7336b78b7afb9540a
   languageName: node
   linkType: hard
 
@@ -3654,8 +3654,8 @@ __metadata:
 
 "readable-stream@file:./gogen/alias/readable-stream::locator=root-workspace-0b6124%40workspace%3A.":
   version: 1.0.0
-  resolution: "readable-stream@file:./gogen/alias/readable-stream#./gogen/alias/readable-stream::hash=b17909&locator=root-workspace-0b6124%40workspace%3A."
-  checksum: d58da88922f393d49c7ee3ebda15812f68cf052ea7c2f70edc46834e38088da9e25eb3fa62d5779dfcf4bb6d5d45c39d46af377da56a376e5026d7825634dc52
+  resolution: "readable-stream@file:./gogen/alias/readable-stream#./gogen/alias/readable-stream::hash=0f0d3d&locator=root-workspace-0b6124%40workspace%3A."
+  checksum: 89553a69ab10bfd29809d5f606f78f7c0496a48eb691640e54b843068f210c76844db21248113d763d43976de99e1a7092bf9e7e8e496b34d657deed80bc1074
   languageName: node
   linkType: hard
 
