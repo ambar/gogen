@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/ambar/gogen/compare/v2.2.1...v2.3.0) (2022-12-27)
+
+
+### Features
+
+* api.src support fast-glob options ([4c3a28f](https://github.com/ambar/gogen/commit/4c3a28f44c2a57defb27f244bd327b61394d6b7b))
+
+
+
+
+
 ## [2.2.1](https://github.com/ambar/gogen/compare/v2.2.0...v2.2.1) (2021-10-13)
 
 
