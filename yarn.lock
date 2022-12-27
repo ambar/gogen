@@ -1139,7 +1139,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "basic@workspace:examples/basic"
   dependencies:
-    gogen: ^2.2.1
+    gogen: ^2.3.0
   languageName: unknown
   linkType: soft
 
@@ -1314,7 +1314,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "cli-create@workspace:examples/cli-create"
   dependencies:
-    gogen: ^2.2.1
+    gogen: ^2.3.0
   bin:
     cli-create: cli.js
   languageName: unknown
@@ -1324,7 +1324,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "cli-run@workspace:examples/cli-run"
   dependencies:
-    gogen: ^2.2.1
+    gogen: ^2.3.0
   bin:
     cli-run: cli.js
   languageName: unknown
@@ -1437,7 +1437,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "create-gogen@workspace:create-gogen"
   dependencies:
-    gogen: ^2.2.1
+    gogen: ^2.3.0
   bin:
     create-gogen: cli.js
   languageName: unknown
@@ -2108,11 +2108,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "gogen-pkg@workspace:gogen-pkg"
   dependencies:
-    gogen: ^2.2.1
+    gogen: ^2.3.0
   languageName: unknown
   linkType: soft
 
-"gogen@^2.2.1, gogen@workspace:gogen":
+"gogen@^2.3.0, gogen@workspace:gogen":
   version: 0.0.0-use.local
   resolution: "gogen@workspace:gogen"
   dependencies:
@@ -3221,9 +3221,9 @@ __metadata:
   linkType: hard
 
 "minimist@npm:^1.2.5":
-  version: 1.2.5
-  resolution: "minimist@npm:1.2.5"
-  checksum: 86706ce5b36c16bfc35c5fe3dbb01d5acdc9a22f2b6cc810b6680656a1d2c0e44a0159c9a3ba51fb072bb5c203e49e10b51dcd0eec39c481f4c42086719bae52
+  version: 1.2.7
+  resolution: "minimist@npm:1.2.7"
+  checksum: 7346574a1038ca23c32e02252f603801f09384dd1d78b69a943a4e8c2c28730b80e96193882d3d3b22a063445f460e48316b29b8a25addca2d7e5e8f75478bec
   languageName: node
   linkType: hard
 
@@ -3654,8 +3654,8 @@ __metadata:
 
 "readable-stream@file:./gogen/alias/readable-stream::locator=root-workspace-0b6124%40workspace%3A.":
   version: 1.0.0
-  resolution: "readable-stream@file:./gogen/alias/readable-stream#./gogen/alias/readable-stream::hash=b17909&locator=root-workspace-0b6124%40workspace%3A."
-  checksum: d58da88922f393d49c7ee3ebda15812f68cf052ea7c2f70edc46834e38088da9e25eb3fa62d5779dfcf4bb6d5d45c39d46af377da56a376e5026d7825634dc52
+  resolution: "readable-stream@file:./gogen/alias/readable-stream#./gogen/alias/readable-stream::hash=0f0d3d&locator=root-workspace-0b6124%40workspace%3A."
+  checksum: 89553a69ab10bfd29809d5f606f78f7c0496a48eb691640e54b843068f210c76844db21248113d763d43976de99e1a7092bf9e7e8e496b34d657deed80bc1074
   languageName: node
   linkType: hard
 
@@ -4359,7 +4359,7 @@ typescript@^4.4.3:
   resolution: "with-ejs@workspace:examples/with-ejs"
   dependencies:
     ejs: ^2.6.1
-    gogen: ^2.2.1
+    gogen: ^2.3.0
   languageName: unknown
   linkType: soft
 
@@ -4367,7 +4367,7 @@ typescript@^4.4.3:
   version: 0.0.0-use.local
   resolution: "with-prompts@workspace:examples/with-prompts"
   dependencies:
-    gogen: ^2.2.1
+    gogen: ^2.3.0
   languageName: unknown
   linkType: soft
 
@@ -4375,7 +4375,7 @@ typescript@^4.4.3:
   version: 0.0.0-use.local
   resolution: "without-gogenrc@workspace:examples/without-gogenrc"
   dependencies:
-    gogen: ^2.2.1
+    gogen: ^2.3.0
   languageName: unknown
   linkType: soft
 
