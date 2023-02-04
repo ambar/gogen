@@ -2188,9 +2188,9 @@ __metadata:
   linkType: hard
 
 "http-cache-semantics@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "http-cache-semantics@npm:4.1.0"
-  checksum: 974de94a81c5474be07f269f9fd8383e92ebb5a448208223bfb39e172a9dbc26feff250192ecc23b9593b3f92098e010406b0f24bd4d588d631f80214648ed42
+  version: 4.1.1
+  resolution: "http-cache-semantics@npm:4.1.1"
+  checksum: 83ac0bc60b17a3a36f9953e7be55e5c8f41acc61b22583060e8dedc9dd5e3607c823a88d0926f9150e571f90946835c7fe150732801010845c72cd8bbff1a236
   languageName: node
   linkType: hard
 
@@ -3654,8 +3654,8 @@ __metadata:
 
 "readable-stream@file:./gogen/alias/readable-stream::locator=root-workspace-0b6124%40workspace%3A.":
   version: 1.0.0
-  resolution: "readable-stream@file:./gogen/alias/readable-stream#./gogen/alias/readable-stream::hash=b17909&locator=root-workspace-0b6124%40workspace%3A."
-  checksum: d58da88922f393d49c7ee3ebda15812f68cf052ea7c2f70edc46834e38088da9e25eb3fa62d5779dfcf4bb6d5d45c39d46af377da56a376e5026d7825634dc52
+  resolution: "readable-stream@file:./gogen/alias/readable-stream#./gogen/alias/readable-stream::hash=0f0d3d&locator=root-workspace-0b6124%40workspace%3A."
+  checksum: 89553a69ab10bfd29809d5f606f78f7c0496a48eb691640e54b843068f210c76844db21248113d763d43976de99e1a7092bf9e7e8e496b34d657deed80bc1074
   languageName: node
   linkType: hard
 
